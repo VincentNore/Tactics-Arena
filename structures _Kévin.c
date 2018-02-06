@@ -12,7 +12,11 @@
 		int esquive;
 		int inventaire; 
 		}; 
-	
+	typedef struct inventaire inventaire;
+            struct inventaire
+        {
+		    /*faire une structure qui appelle des fonctions pour définir 'effet de chaques objets */
+        }
 	/*struct heros unités avancées
 		char nom[20];
 		int attaque = 10;
