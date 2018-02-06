@@ -41,7 +41,7 @@ int init_struct(void)
 	
 	printf("Entrez un nom pour le sbire des rouges: \n");
 	scanf("%s",sbire_rouge.nom);  */
-		sbire_bleu.nom = 'a';
+		sbire_bleu.nom[20] = 'a';
 		sbire_bleu.attaque = 2;
 		sbire_bleu.vie = 10;
 		sbire_bleu.defense = 10;
