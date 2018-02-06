@@ -46,13 +46,13 @@ int main(void){
 	if(de1 > de2)		/* Tour du joueur */
 	{
 		printf("Le joueur commence !\n");
-		tour == 1;
+		tour = 1;
 		ChoixDeplacement(tour);
 	}
 	else if(de1 < de2)	/* Tour de l'IA */
 	{
 		printf("L'IA commence !\n");
-		tour == 0;
+		tour = 0;
 		ChoixDeplacement(tour);
 	}
 	else		/* Egalité aux dés */
