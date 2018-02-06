@@ -31,7 +31,7 @@
 		int inventaire = NULL;	 
 		} esprits-héroiques_bleu,esprits-héroiques_rouge;*/
 
-int main(void)
+int init_struct(void)
 {
 	 sbires sbire_bleu;
 	 sbires sbire_rouge;
@@ -41,12 +41,19 @@ int main(void)
 	
 	printf("Entrez un nom pour le sbire des rouges: \n");
 	scanf("%s",sbire_rouge.nom);  */
-	
-	sbire_bleu.attaque= 2;
+		sbire_bleu.nom = 'a';
+		sbire_bleu.attaque = 2;
+		sbire_bleu.vie = 10;
+		sbire_bleu.defense = 10;
+		sbire_bleu.esquive = 10;
+		sbire_bleu.inventaire = NULL;	
 	
 	printf("l'attaque du sbire bleu est donc de %d.\n",sbire_bleu.attaque);
-	/*printf("le nom du sbire rouge est donc %s.\n",sbire_rouge.nom);
-	printf("le nom du sbire bleu est donc %s.\n",sbire_bleu.nom);*/
+	printf("l'attaque du sbire bleu est donc de %d.\n",sbire_bleu.vie);
+	printf("l'attaque du sbire bleu est donc de %d.\n",sbire_bleu.defense);
+	printf("l'attaque du sbire bleu est donc de %d.\n",sbire_bleu.esquive);
+	printf("l'attaque du sbire bleu est donc de %d.\n",sbire_bleu.inventaire);
+	printf("le nom du sbire bleu est donc %s.\n",sbire_bleu.nom);
 	
 
 	return(0);
