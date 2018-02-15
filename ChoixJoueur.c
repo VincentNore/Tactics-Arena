@@ -39,8 +39,8 @@ int main(void){
 	printf("Chaque joueur lance un dé de l'infini.\n");
 	printf("Celui qui possède le plus grand nombre commence.\n");
 	printf("Lancez les dés !\n");
-	de1 = rand();
-	de2 = rand();
+	de1 = rand()%10;
+	de2 = rand()%10;
 	printf("Le joueur a obtenu un %i\n",de1);
 	printf("L'IA a obtenu un %i\n",de2);
 	if(de1 > de2)		/* Tour du joueur */
