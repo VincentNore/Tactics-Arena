@@ -74,5 +74,5 @@ int main(void)
 	printf("le nom du sbire bleu est donc %s.\n",sbire_bleu.nom);
 	printf("la mana du sbire bleu est donc %d.\n",sbire_bleu.mana);
 	
-	return(0);
+	return(0); 
 }
