@@ -11,19 +11,19 @@ int Compte_Cases(t_sbires sbires, char mat[][], int direction){ /*Fonction de co
 	
 	switch (direction){
 		case 1 : printf("Vertical haut : ");
-			for(nbr_cases = 1 ; mat[sbires.position[0]][sbires.position[1] + nbr_cases] == NULL; nbr_cases++);
+			for(nbr_cases = 1 ; (mat[sbires.position[0]][sbires.position[1] + nbr_cases] == NULL) || (nbr_cases < sbires.nbr_depl); nbr_cases++);
 			printf("%i cases praticables\n", nbr_cases);
 	
 			printf("Vertical bas : ")
-			for(nbr_cases = 1 ; mat[sbires.position[0]][sbires.position[1] - nbr_cases] == NULL; nbr_cases++);
+			for(nbr_cases = 1 ; (mat[sbires.position[0]][sbires.position[1] - nbr_cases] == NULL) || (nbr_cases < sbires.nbr_depl); nbr_cases++);
 			printf("%i cases praticables\n", nbr_cases);
 			break;
 		case 2 : printf("Horizontal gauche : ");
-			for(nbr_cases = 1 ; mat[sbires.position[0] - nbr_cases][sbires.position[1]] == NULL; nbr_cases++);
+			for(nbr_cases = 1 ; (mat[sbires.position[0] - nbr_cases][sbires.position[1]] == NULL) || (nbr_cases < sbires.nbr_depl); nbr_cases++);
 			printf("%i cases praticables\n", nbr_cases);
 	
 			printf("Horizontal droite : ")
-			for(nbr_cases = 1 ; mat[sbires.position[0] + nbr_cases][sbires.position[1]] == NULL; nbr_cases++);
+			for(nbr_cases = 1 ; (mat[sbires.position[0] + nbr_cases][sbires.position[1]] == NULL) || (nbr_cases < sbires.nbr_depl); nbr_cases++);
 			printf("%i cases praticables\n", nbr_cases);
 			break;
 		default : printf("Erreur de direction\n");
