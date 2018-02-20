@@ -3,9 +3,59 @@
 #include <string.h>
 #include <time.h>
 
-void Deplacement(t_sbires sbires){ /*Fonction de déplacement de l'unité : /!\ A COMPLETER /!\ */
+int Compte_Cases(t_sbires sbires, char mat[][], int direction){ /*Fonction de comptage des cases*/
+/*Compte les cases à la verticale (haut et bas) et à l'horizontale (gauche et droite)*/
+// /!\A TESTER/!\
+
+	int nbr_cases;
+	
+	switch (direction){
+		case 1 : printf("Vertical haut : ");
+			for(nbr_cases = 1 ; mat[sbires.position[0]][sbires.position[1] + nbr_cases] == NULL; nbr_cases++);
+			printf("%i cases praticables\n", nbr_cases);
+	
+			printf("Vertical bas : ")
+			for(nbr_cases = 1 ; mat[sbires.position[0]][sbires.position[1] - nbr_cases] == NULL; nbr_cases++);
+			printf("%i cases praticables\n", nbr_cases);
+			break;
+		case 2 : printf("Horizontal gauche : ");
+			for(nbr_cases = 1 ; mat[sbires.position[0] - nbr_cases][sbires.position[1]] == NULL; nbr_cases++);
+			printf("%i cases praticables\n", nbr_cases);
+	
+			printf("Horizontal droite : ")
+			for(nbr_cases = 1 ; mat[sbires.position[0] + nbr_cases][sbires.position[1]] == NULL; nbr_cases++);
+			printf("%i cases praticables\n", nbr_cases);
+			break;
+		default : printf("Erreur de direction\n");
+			break;
+	}
+	
+	return nbr_cases;
+}
+
+void Deplacement(t_sbires sbires, char mat[][]){ /*Fonction de déplacement de l'unité : /!\ A COMPLETER /!\ */
+	int choix = 0;
+	int nbr_cases = 0;
 	printf("\nDistance maximale de déplacement de l'unité %s \n", sbires.nom);
 	printf("%i cases maximum.\n", sbires.nbr_depl);
+	printf("Position : %i %i\n", sbires.position[0], sbires.position[1]);
+	printf("Déplacements vertical ou horizontal ?\n");
+	printf("1 : Vertical\n2 : Horizontal\n3 : Annuler Déplacement\nChoix : ");
+	
+	scanf("%i", choix);
+	
+	switch(choix){
+		case 1 : printf("Déplacement vertical\n");
+			nbr_cases = Compte_Cases(sbires, mat[][], choix);
+			break;
+		case 2 : printf("Déplacement horizontal\n");
+			nbr_cases = Compte_Cases(sbires, mat[][], choix);
+			break;
+		case 3 : printf("Déplacement annulé\n");
+			break;
+		default : printf("Déplacement annulé\n");
+			break;
+	}
 	
 }
 
@@ -69,7 +119,7 @@ t_sbires Selection_Action(t_sbires sbires){ /*Fonction de sélection  : Déplace
 		scanf("%i", &choix);
 	
 	switch (choix) {
-		case 1 : Deplacement(sbires);
+		case 1 : Deplacement(sbires); /* /!\Insérez matrice ci-contre/!\ */
 			break;
 		case 2 : Action(sbires);
 			break;
