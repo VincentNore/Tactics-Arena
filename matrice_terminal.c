@@ -15,16 +15,15 @@
 #define MAX_eau 3
 #define MIN_eau 0
 
-char matrice[N][N];
-
 
 /*Fonction pour initialiser la matrice à vide*/
-void init_matrice(){
+void init_matrice(char matrice_affichage[N][N], int matrice_indice[N][N]){
 	char libre = '.';
 	int i, j;
 	for (i=0; i<N; i++) {
 		for (j=0; j<N; j++) {
-			matrice[i][j] = libre;
+			matrice_affichage[i][j] = libre;
+			matrice_indice[i][j] = 0;
 			
 		}
 	}	
@@ -32,7 +31,7 @@ void init_matrice(){
 
 
 /*Fonction pour placer les décors*/
-void placer_decors(){
+void placer_decors(char matrice_affichage[N][N], int matrice_indice[N][N]){
 	int i, j, nb_ligne, nb_colonne ,nb_pierre, qts_eau;
 	
 	decors_t decors;
@@ -46,7 +45,8 @@ void placer_decors(){
 	for(i=0; i<nb_pierre; i++){
 		nb_colonne = (rand() % (MAX - MIN + 1)) + MIN; /*Génération d'un nombre aléatoire pour les colonne*/
 		nb_ligne = (rand() % (MAX - MIN + 1)) + MIN; /*Génération d'un nombre aléatoire pour les lignes*/
-		matrice[nb_ligne][nb_colonne] = decors.pierre;
+		matrice_affichage[nb_ligne][nb_colonne] = decors.pierre;
+		matrice_indice[nb_ligne][nb_colonne] = 2;
 	}
 	
 	qts_eau = (rand() % (MAX_eau - MIN_eau + 1)) + MIN; /*Génération d'un nombre aléatoire pour l'eau*/
@@ -54,22 +54,39 @@ void placer_decors(){
 	for(j=0; j<qts_eau; j++){
 		nb_colonne = (rand() % (MAX - MIN + 1)) + MIN;
 		nb_ligne = (rand() % (MAX - MIN + 1)) + MIN;
-		matrice[nb_ligne][nb_colonne] = decors.eau;
-		matrice[nb_ligne+1][nb_colonne] = decors.eau;
-		matrice[nb_ligne][nb_colonne+1] = decors.eau;
-		matrice[nb_ligne+1][nb_colonne+1] = decors.eau;
-		matrice[nb_ligne-1][nb_colonne] = decors.eau;
-		matrice[nb_ligne][nb_colonne-1] = decors.eau;
-		matrice[nb_ligne-1][nb_colonne-1] = decors.eau;
-		matrice[nb_ligne+1][nb_colonne-1] = decors.eau;
-		matrice[nb_ligne-1][nb_colonne+1] = decors.eau;
+		matrice_affichage[nb_ligne][nb_colonne] = decors.eau;
+		matrice_indice[nb_ligne][nb_colonne] = 3;
+		
+		matrice_affichage[nb_ligne+1][nb_colonne] = decors.eau;
+		matrice_indice[nb_ligne+1][nb_colonne] = 3;
+		
+		matrice_affichage[nb_ligne][nb_colonne+1] = decors.eau;
+		matrice_indice[nb_ligne][nb_colonne+1] = 3;
+		
+		matrice_affichage[nb_ligne+1][nb_colonne+1] = decors.eau;
+		matrice_indice[nb_ligne+1][nb_colonne+1] = 3;
+		
+		matrice_affichage[nb_ligne-1][nb_colonne] = decors.eau;
+		matrice_indice[nb_ligne-1][nb_colonne] = 3;
+		
+		matrice_affichage[nb_ligne][nb_colonne-1] = decors.eau;
+		matrice_indice[nb_ligne][nb_colonne-1] = 3;
+		
+		matrice_affichage[nb_ligne-1][nb_colonne-1] = decors.eau;
+		matrice_indice[nb_ligne-1][nb_colonne-1] = 3;
+		     
+		matrice_affichage[nb_ligne+1][nb_colonne-1] = decors.eau;
+		matrice_indice[nb_ligne+1][nb_colonne-1] = 3;
+		
+		matrice_affichage[nb_ligne-1][nb_colonne+1] = decors.eau;
+		matrice_indice[nb_ligne-1][nb_colonne+1] = 3;
 		
 	}
 }
 
 
 /*Fonction pour placer les pions des deux joueurs*/
-void placer_pions(){
+void placer_pions(char matrice_affichage[N][N], int matrice_indice[N][N]){
 	
 	joueurs_t joueurs;
 	
@@ -79,26 +96,28 @@ void placer_pions(){
 	int i, j;
 	for(i=0; i<1; i++){
 		for(j=0; j<N; j++){
-			matrice[i][j] = joueurs.joueur1;
+			matrice_affichage[i][j] = joueurs.joueur1;
+			matrice_indice[i][j] = 1;
 		}
 	}
 	
 	for(i=0; i<N; i++){
 		for(j=0; j<N; j++){
 			if(i == 10){
-				matrice[i][j] = joueurs.joueur2;
+				matrice_affichage[i][j] = joueurs.joueur2;
+				matrice_indice[i][j] = 1;
 			}
 		}
 	}	
 }
 
 /*Fonction afficher la matrice*/
-void afficher_matrice(){
+void afficher_matrice(char matrice_affichage[N][N]){
 	int i, j;
 	for (i=0; i<N; i++){
 		for(j=0; j<N; j++){
-			printf("%c", matrice[i][j]);
+			printf("%c", matrice_affichage[i][j]);
 		}
 		printf("\n");
-	}	
+	}
 }
