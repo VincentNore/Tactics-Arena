@@ -1,21 +1,18 @@
+ 
+	
+
 
 #include<stdio.h>
 #include<stdlib.h>
+#include"test.h"
 
-	typedef struct sbires sbires; /*uniétés de base */
-		struct sbires
-		{
-		char * nom;
-		int attaque;
-		int vie;
-		int defense;
-		int esquive; 
-		int mana;
-		}; 
-
-void inventaire(){
 	
+			
+		
+		
+sbires inventaire(sbires sbire_bleu){
 	
+	int inventaire;
 	printf("\t choissisez un objet dans l'inventaire :\n"); 
 
 	scanf("%d",&inventaire);
@@ -25,66 +22,53 @@ void inventaire(){
 	 { 
 		 case 0 :if (sbire_bleu.vie > 0)
 			  { sbire_bleu.vie += 10;
-			   if(sbire_bleu.vie > 10)sbire_bleu.vie = 10;  
+			   if(sbire_bleu.vie > 10)sbire_bleu.vie = 10; 
+			   
 			    printf("\t potion_de_soin à été utilisée\n");
 			  }
 			else printf("\t le sbire est mort, action impossible\n");break;
 
 		 case 1 :if (sbire_bleu.vie > 0)
 			  { sbire_bleu.mana += 10;
-			   if(sbire_bleu.mana > 10)sbire_bleu.mana = 10;  
+			   if(sbire_bleu.mana > 10)sbire_bleu.mana = 10; 
+			
 			    printf("\t gemme à été utilisée\n");
 			  }
 			else printf("\t le sbire est mort, action impossible\n");break;
 
 		 default:printf("ERROR\n");
 	}
+	return(sbire_bleu.vie); // voir retourner structure depuis un type structure 
 }
 
 
 
-int structures(void)
+void structures(sbires sbire_bleu)
 {
-	int inventaire;
-	sbires sbire_bleu;
-	sbires sbire_rouge;
-
-		sbire_bleu.nom = "lul";
-		sbire_bleu.attaque = 2;
-		sbire_bleu.vie = 1;
-		sbire_bleu.defense = 10;
-		sbire_bleu.esquive = 10;
-		sbire_bleu.mana = 1;	
-
 	printf("l'attaque du sbire bleu est donc de %d.\n",sbire_bleu.attaque);
 	printf("la vie du sbire bleu est donc de %d.\n",sbire_bleu.vie);
 	printf("la défense du sbire bleu est donc de %d.\n",sbire_bleu.defense);
 	printf("l'esquive du sbire bleu est donc de %d.\n",sbire_bleu.esquive);
 	printf("le nom du sbire bleu est donc %s.\n",sbire_bleu.nom);
-	
-	printf("la mana du sbire bleu est donc %d.\n",sbire_bleu.mana);
-
-	inventaire();
-	
-	/*printf("Entrez un nom pour le sbire des bleus: \n");
-	scanf("%s",sbire_bleu.nom);  
-	
-	printf("Entrez un nom pour le sbire des rouges: \n");
-	scanf("%s",sbire_rouge.nom);  */	
-	
-	/*printf("dans l'inventaire du sbire bleu il y a %s\n",gemme);
-	printf("dans l'inventaire du sbire bleu il y a %d\n",potion_de_soin);*/
-
-	printf("l'attaque du sbire bleu est donc de %d.\n",sbire_bleu.attaque);
-	printf("la vie du sbire bleu est donc de %d.\n",sbire_bleu.vie);
-	printf("la défense du sbire bleu est donc de %d.\n",sbire_bleu.defense);
-	printf("l'esquivedu sbire bleu est donc de %d.\n",sbire_bleu.esquive);
-	printf("le nom du sbire bleu est donc %s.\n",sbire_bleu.nom);
 	printf("la mana du sbire bleu est donc %d.\n",sbire_bleu.mana);
 	
-	return(0); 
 }
 
+
+int main(){
+	sbires sbire_bleu;
+	
+	sbire_bleu.nom = "lol";
+	sbire_bleu.attaque = 1;
+	sbire_bleu.vie= 1;
+	sbire_bleu.defense= 1;
+	sbire_bleu.esquive= 1;
+	sbire_bleu.mana= 1;	
+
+structures(sbire_bleu);
+inventaire(sbire_bleu);
+structures(sbire_bleu);
+}
 
 
 
