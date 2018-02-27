@@ -71,7 +71,8 @@ t_sbires Combat_magique(t_sbires sbires1, t_sbires sbires2){
 	return sbires2;
 }
 
-void Deplacement(t_sbires sbires){ /*Fonction de déplacement de l'unité : /!\ A COMPLETER /!\ */
+void Deplacement(t_sbires sbires, char mat[][]){
+/*Fonction de déplacement de l'unité : /!\ A COMPLETER /!\ */
 	int choix = 0;
 	int nbr_cases = 0;
 	printf("\nDistance maximale de déplacement de l'unité %s \n", sbires.nom);
@@ -97,7 +98,8 @@ void Deplacement(t_sbires sbires){ /*Fonction de déplacement de l'unité : /!\ 
 	
 }
 
-t_sbires Action(t_sbires sbires, t_sbires cible){ /*Actions possibles de l'unité : Attaque (Normale ou Magique)
+t_sbires Action(t_sbires sbires, t_sbires cible){
+/*Actions possibles de l'unité : Attaque (Normale ou Magique)
 Défense , Inventaire et Annulation de l'Action*/
 
 	int choix_action = 0;
@@ -147,7 +149,8 @@ Défense , Inventaire et Annulation de l'Action*/
 	return cible;
 }
 
-t_sbires Selection_Action(t_sbires sbires, t_sbires cible){ /*Fonction de sélection  : Déplacement ou Action de l'unité*/
+t_sbires Selection_Action(t_sbires sbires, t_sbires cible/*, char mat[][]*/){
+/*Fonction de sélection : Déplacement ou Action de l'unité*/
 
 	int choix = 0;
 	printf("\nQue doit faire %s ?\n", sbires.nom);
