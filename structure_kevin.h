@@ -13,6 +13,6 @@
 		int  mana;
 		}; 
 
-void structures(sbires sbires_bleux);
-sbires inventaire(sbires sbires_bleux);
-
+void structures(sbires sbire_bleu);
+sbires inventaire(sbires sbire_bleu);
+sbires competences(sbires sbire_bleu);
