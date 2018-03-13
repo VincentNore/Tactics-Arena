@@ -1,15 +1,9 @@
- 
-	
 
 
 #include<stdio.h>
 #include<stdlib.h>
 #include"test.h"
 
-	
-			
-		
-		
 sbires inventaire(sbires sbire_bleu){
 	
 	int inventaire;
@@ -22,9 +16,10 @@ sbires inventaire(sbires sbire_bleu){
 	 { 
 		 case 0 :if (sbire_bleu.vie > 0)
 			  { sbire_bleu.vie += 10;
-			   if(sbire_bleu.vie > 10)sbire_bleu.vie = 10; 
+			   if(sbire_bleu.vie > 10)sbire_bleu.vie = 10;
 			   
 			    printf("\t potion_de_soin à été utilisée\n");
+				
 			  }
 			else printf("\t le sbire est mort, action impossible\n");break;
 
@@ -38,10 +33,40 @@ sbires inventaire(sbires sbire_bleu){
 
 		 default:printf("ERROR\n");
 	}
-	return(sbire_bleu.vie); // voir retourner structure depuis un type structure 
+	return(sbire_bleu); 
 }
 
+	sbires competences(sbires sbire_bleu){
+		int competences;
+		
+		printf("\t choissisez une compétence à utiliser :\n"); 
+		scanf("%d",&competences);
+		
+		switch(competences)
 
+	 { 
+		 case 0 : if (sbire_bleu.vie > 0)
+			  { sbire_bleu.attaque = 3;
+			   
+			       printf("\t attaque auto utilisé\n");
+				
+			  }
+			else printf("\t le sbire est mort, action impossible\n");break;
+	
+		 case 1 : if (sbire_bleu.vie > 0){
+			  	if (sbire_bleu.mana > 4){
+					{ sbire_bleu.attaque = 8;
+			    		sbire_bleu.mana = sbire_bleu.mana -3;
+			   
+			      		 printf("\t dragon punch utilisé\n");
+				 }
+				}else printf("\t le sbire manque de mana, action impossible\n");break;
+			  
+			}else printf("\t le sbire est mort, action impossible\n");break;
+		 default:printf("ERROR\n");
+	}
+	return(sbire_bleu); 
+}
 
 void structures(sbires sbire_bleu)
 {
@@ -66,11 +91,9 @@ int main(){
 	sbire_bleu.mana= 1;	
 
 structures(sbire_bleu);
-inventaire(sbire_bleu);
+sbire_bleu = inventaire(sbire_bleu);
+sbire_bleu =competences(sbire_bleu);
 structures(sbire_bleu);
 }
-
-
-
 
 
