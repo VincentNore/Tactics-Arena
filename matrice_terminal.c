@@ -23,21 +23,15 @@ void init_matrice(char matrice_affichage[N][N], int matrice_indice[N][N]){
 	for (i=0; i<N; i++) {
 		for (j=0; j<N; j++) {
 			matrice_affichage[i][j] = libre;
-			matrice_indice[i][j] = 0;
-			
+			matrice_indice[i][j] = 0;	
 		}
 	}	
 }
 
 
 /*Fonction pour placer les décors*/
-void placer_decors(char matrice_affichage[N][N], int matrice_indice[N][N]){
+void placer_decors(char matrice_affichage[N][N], int matrice_indice[N][N], decors_t decors){
 	int i, j, nb_ligne, nb_colonne ,nb_pierre, qts_eau;
-	
-	decors_t decors;
-	
-	decors.eau = 'e';
-	decors.pierre = 'p';
 	
 	srand(time(NULL));
 	nb_pierre = (rand() % (MAX_pierre - MIN_pierre + 1)) + MIN; /*Génération d'un nombre aléatoire pour les pierres*/
@@ -84,28 +78,30 @@ void placer_decors(char matrice_affichage[N][N], int matrice_indice[N][N]){
 	}
 }
 
-
 /*Fonction pour placer les pions des deux joueurs*/
-void placer_pions(char matrice_affichage[N][N], int matrice_indice[N][N]){
-	
-	joueurs_t joueurs;
-	
-	joueurs.joueur1 = 'o';
-	joueurs.joueur2 = 'x';
+void placer_pions(char matrice_affichage[N][N], int matrice_indice[N][N], sbires sbire_bleu, sbires sbire_rouge){
 
 	int i, j;
 	for(i=0; i<1; i++){
-		for(j=0; j<N; j++){
-			matrice_affichage[i][j] = joueurs.joueur1;
+		for(j=0; j<2; j++){
+			matrice_affichage[i][j] = sbire_bleu.symbole;
 			matrice_indice[i][j] = 1;
+			sbire_bleu.position[0] = i;
+			sbire_bleu.position[1] = j;
+			printf("\n%i\n", sbire_bleu.position[0]);
+			printf("%i\n\n", sbire_bleu.position[1]);
 		}
 	}
 	
 	for(i=0; i<N; i++){
-		for(j=0; j<N; j++){
+		for(j=0; j<2; j++){
 			if(i == 10){
-				matrice_affichage[i][j] = joueurs.joueur2;
+				matrice_affichage[i][j] = sbire_rouge.symbole;
 				matrice_indice[i][j] = 1;
+				sbire_rouge.position[0] = i;
+				sbire_rouge.position[1] = j;
+				printf("\n%i\n", sbire_rouge.position[0]);
+				printf("%i\n\n", sbire_rouge.position[1]);
 			}
 		}
 	}	
@@ -117,6 +113,17 @@ void afficher_matrice(char matrice_affichage[N][N]){
 	for (i=0; i<N; i++){
 		for(j=0; j<N; j++){
 			printf("%c", matrice_affichage[i][j]);
+		}
+		printf("\n");
+	}
+}
+
+/*Fonction afficher la matrice*/
+void afficher_matrice_indice(int matrice_indice[N][N]){
+	int i, j;
+	for (i=0; i<N; i++){
+		for(j=0; j<N; j++){
+			printf("%i", matrice_indice[i][j]);
 		}
 		printf("\n");
 	}
