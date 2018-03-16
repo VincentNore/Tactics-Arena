@@ -96,4 +96,3 @@ sbire_bleu =competences(sbire_bleu);
 structures(sbire_bleu);
 }
 
-
