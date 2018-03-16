@@ -27,10 +27,17 @@ typedef struct joueurs_s{
 	} joueurs_t;
 	
 void init_matrice();
+
 void placer_decors();
-void placer_pions();
+sbires placer_pions();
+
 void afficher_matrice();
+void afficher_matrice_indice();
+
 int Compte_Cases(sbires, char matrice_affichage, int direction);
+
 void Deplacement(sbires, char matrice_affichage);
+
 void Action(sbires);
+
 sbires Selection_Action(sbires, char matrice_affichage);
