@@ -16,3 +16,4 @@
 void structures(sbires sbire_bleu);
 sbires inventaire(sbires sbire_bleu);
 sbires competences(sbires sbire_bleu);
+
