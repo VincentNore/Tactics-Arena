@@ -1,9 +1,9 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-typedef struct sbires sbires; /*unités de base */
-		struct sbires
-		{
+#define N 11
+
+typedef struct sbires_s{
 		char * nom;
 		char symbole;
 		int attaque;
@@ -13,7 +13,7 @@ typedef struct sbires sbires; /*unités de base */
 		int mana;
 		int nbr_depl;
 		int position[2];
-		}; 
+		} sbires_t; 
 
 typedef struct decors_s{
 		char eau; 
@@ -28,16 +28,10 @@ typedef struct joueurs_s{
 	
 void init_matrice();
 
+sbires_t init_armee(sbires_t sbire, int mat[N][N]);
+
 void placer_decors();
-sbires placer_pions();
 
-void afficher_matrice();
-void afficher_matrice_indice();
+int afficher_matrice(int mat[N][N], sbires_t sbire, sbires_t dummy, decors_t decors);
 
-int Compte_Cases(sbires, char matrice_affichage, int direction);
-
-void Deplacement(sbires, char matrice_affichage);
-
-void Action(sbires);
-
-sbires Selection_Action(sbires, char matrice_affichage);
+int positionner_sbire(sbires_t sbire, int mat[N][N]);
