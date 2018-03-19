@@ -9,19 +9,37 @@
 /* Fonction de sélection d'unité par tour */
 
 void ChoixUnite(int tour){
+	int c; /*Choix du joueur*/
 	int u; /* numéro de l'unité */
 	if(tour == 1){ /* Si tour = 1 , le joueur 1 joue, sinon, le joueur 2 joue*/
-		printf("C'est au tour du joueur 1\n");
+		printf("C'est au tour du joueur 1\n\n");
 		printf("Selectionnez une unité (1,2,3 ou 4) :\n");
+		
 		scanf("%d",&u);
+		
+		printf("\n");
+		
 		switch(u)
 		{
-		case 1: printf("Vous avez selectionné l'unité 1.\n"); break;
-		case 2: printf("Vous avez selectionné l'unité 2.\n"); break;
-		case 3: printf("Vous avez selectionné l'unité 3.\n"); break;
-		case 4: printf("Vous avez selectionné l'unité 4.\n"); break;
-		}	
-			
+		case 1: printf("Vous avez selectionné l'unité 1.\n\n"); break;
+		case 2: printf("Vous avez selectionné l'unité 2.\n\n"); break;
+		case 3: printf("Vous avez selectionné l'unité 3.\n\n"); break;
+		case 4: printf("Vous avez selectionné l'unité 4.\n\n"); break;
+		}
+		
+		printf("Que voulez vous faire avec l'unité selectionée ?\n");
+		printf("1: Attaquer \n 2: Deplacement \n");
+		
+		scanf("%d",&c);
+		
+		printf("\n");	
+	
+		switch(c)
+		{
+		case 1: printf("Vous attaquez avec l'unité %d.\n\n",u); break;
+		case 2: printf("Vous deplacez l'unité %d.\n\n",u); break;
+		}
+				
 
 	}
 	else if(tour == 0)
@@ -35,12 +53,26 @@ void ChoixUnite(int tour){
 		case 2: printf("Vous avez selectionné l'unité 2.\n"); break;
 		case 3: printf("Vous avez selectionné l'unité 3.\n"); break;
 		case 4: printf("Vous avez selectionné l'unité 4.\n"); break;
+		}
+		
+		printf("Que voulez vous faire avec l'unité selectionée ?\n");
+		printf("1: Attaquer \n 2: Deplacement \n");
+		
+		scanf("%d",&c);
+		
+		printf("\n");	
+	
+		switch(c)
+		{
+		case 1: 
+			printf("Vous attaquez avec l'unité %d.\n\n",u); break;
+		case 2: printf("Vous deplacez l'unité %d.\n\n",u); break;
 		}	
 
 	}
 }
 
-void DebutPartie(int tour){
+int DebutPartie(int tour){
 	
 	int de1,de2; /* dé des deux joueurs */
 	srand(time(NULL));
@@ -75,6 +107,7 @@ void DebutPartie(int tour){
 		tour = 0;
 		ChoixUnite(tour);
 	}
+	return tour;
 	
 	
 }
