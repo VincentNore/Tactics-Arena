@@ -5,6 +5,7 @@
 
 sbires inventaire(sbires sbire_bleu){
 	int potion_soins =5;
+	int nb_gemme = 5;
 	int inventaire;
 	printf("\t choissisez un objet dans l'inventaire :\n"); 
 	printf("\t 0:potion de soins | 1:gemme de mana :\n");
@@ -23,13 +24,15 @@ sbires inventaire(sbires sbire_bleu){
 				  }
 				else printf("\t le sbire est mort, action impossible\n");break;
 			}else printf("\t Vous n'avez plus de potion de soins !\n");break;
-		 case 1 :if (sbire_bleu.vie > 0)
-			  { sbire_bleu.mana += 10;
+		 case 1 :if (potion_soins >0){
+			   if(sbire_bleu.vie > 0){ 
+			    sbire_bleu.mana += 10;
 			   if(sbire_bleu.mana > 10)sbire_bleu.mana = 10; 
-			
-			    printf("\t gemme à été utilisée\n");
+			     nb_gemme = nb_gemme -1;
+			     printf("\t gemme à été utilisée, il vous en reste %i\n",nb_gemme);
 			  }
 			else printf("\t le sbire est mort, action impossible\n");break;
+		}else printf("\t Vous n'avez plus de gemme de mana !\n");break;
 
 		 default:printf("ERROR\n");
 	}
@@ -80,7 +83,7 @@ sbires Combat_physique(sbires sbire_bleu, sbires sbire_rouge){
 	if(degats < 0){
 		degats = 0;
 	}
-	if( (rand()%(100 - 1) + 1) > sbire_rouge.esquive ){ 
+	if( (rand()%(10 - 1) + 1) >= sbire_rouge.esquive ){ 
 		sbire_rouge.vie = sbire_rouge.vie - degats;
 		if(sbire_rouge.vie < 0){
 			sbire_rouge.vie = 0;
@@ -100,7 +103,7 @@ sbires Combat_magique(sbires sbire_bleu, sbires sbire_rouge){
 	if(degats < 0){
 		degats = 0;
 	}
-	if( (rand()%(100 - 1) + 1) > sbire_rouge.esquive ){ 
+	if( (rand()%(10 - 1) + 1) > sbire_rouge.esquive ){ 
 		sbire_rouge.vie = sbire_rouge.vie - degats;
 		printf("%s reçoit %i dégats magiques\n", sbire_rouge.nom, degats);
 		if(sbire_rouge.vie < 0){
@@ -151,7 +154,7 @@ int main(){
 	sbire_rouge.attaque = 1;
 	sbire_rouge.vie= 10;
 	sbire_rouge.defense= 2;
-	sbire_rouge.esquive= 5;
+	sbire_rouge.esquive= 8;
 	sbire_rouge.mana= 8;	
 
 structures(sbire_bleu,sbire_rouge);
