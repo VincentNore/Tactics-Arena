@@ -2,6 +2,7 @@
 #include<stdlib.h>
 #include<math.h>
 #include<time.h>
+#include<string.h>
 #include"matrice_terminal.h"
 
 #define N 11
@@ -20,20 +21,18 @@
 
 
 /*Fonction pour initialiser la matrice à vide*/
-void init_matrice(char matrice_affichage[N][N], int matrice_indice[N][N]){
-	char libre = '.';
+void init_matrice(int mat[N][N]){
 	int i, j;
 	for (i=0; i<N; i++) {
 		for (j=0; j<N; j++) {
-			matrice_affichage[i][j] = libre;
-			matrice_indice[i][j] = 0;	
+			mat[i][j] = 0;	
 		}
 	}	
 }
 
 
 /*Fonction pour placer les décors*/
-void placer_decors(char matrice_affichage[N][N], int matrice_indice[N][N], decors_t decors){
+void placer_decors(int mat[N][N], decors_t decors){
 	int i, j, nb_ligne=0, nb_colonne=0, nb_pierre=0, qts_eau=0;
 	
 	srand(time(NULL));
@@ -42,8 +41,9 @@ void placer_decors(char matrice_affichage[N][N], int matrice_indice[N][N], decor
 	for(i=0; i<nb_pierre; i++){
 		nb_colonne = (rand() % (MAX - MIN + 1)) + MIN; /*Génération d'un nombre aléatoire pour les colonne*/
 		nb_ligne = (rand() % (MAX - MIN + 1)) + MIN; /*Génération d'un nombre aléatoire pour les lignes*/
-		matrice_affichage[nb_ligne][nb_colonne] = decors.pierre;
-		matrice_indice[nb_ligne][nb_colonne] = 2;
+		mat[nb_ligne][nb_colonne] = 1;
+		printf("p ");
+
 	}
 	
 	qts_eau = (rand() % (MAX_eau - MIN_eau + 1)) + MIN; /*Génération d'un nombre aléatoire pour l'eau*/
@@ -51,76 +51,110 @@ void placer_decors(char matrice_affichage[N][N], int matrice_indice[N][N], decor
 	for(j=0; j<qts_eau; j++){
 		nb_colonne = (rand() % (MAX - MIN + 1)) + MIN;
 		nb_ligne = (rand() % (MAX - MIN + 1)) + MIN;
-		matrice_affichage[nb_ligne][nb_colonne] = decors.eau;
-		matrice_indice[nb_ligne][nb_colonne] = 3;
+		mat[nb_ligne][nb_colonne] = 2;
+		printf("o ");
+		/*mat[nb_ligne+1][nb_colonne] = 2;
+		printf("o ");
+		mat[nb_ligne][nb_colonne+1] = 2;
+		printf("o ");
+		mat[nb_ligne+1][nb_colonne+1] = 2;
+		printf("o ");		
+		mat[nb_ligne-1][nb_colonne] = 2;
+		printf("o ");
+		mat[nb_ligne][nb_colonne-1] = 2;
+		printf("o ");
+		mat[nb_ligne-1][nb_colonne-1] = 2;
+		printf("o ");
+		mat[nb_ligne+1][nb_colonne-1] = 2;
+		printf("o ");
+		mat[nb_ligne-1][nb_colonne+1] = 2;
+		printf("o ");*/
+	}
+}
 
-		matrice_affichage[nb_ligne+1][nb_colonne] = decors.eau;
-		matrice_indice[nb_ligne+1][nb_colonne] = 3;
+/*Fonction afficher la matrice*/
+int afficher_matrice(int mat[N][N], sbires_t sbire, sbires_t dummy, decors_t decors){
 
-		matrice_affichage[nb_ligne][nb_colonne+1] = decors.eau;
-		matrice_indice[nb_ligne][nb_colonne+1] = 3;
-
-		matrice_affichage[nb_ligne+1][nb_colonne+1] = decors.eau;
-		matrice_indice[nb_ligne+1][nb_colonne+1] = 3;
+	int nb_colonne = (rand() % (MAX - MIN + 1)) + MIN;
+	int nb_ligne = (rand() % (MAX - MIN + 1)) + MIN;
+	int qts_eau = (rand() % (MAX_eau - MIN_eau + 1)) + MIN;
 		
-		matrice_affichage[nb_ligne-1][nb_colonne] = decors.eau;
-		matrice_indice[nb_ligne-1][nb_colonne] = 3;
-
-		matrice_affichage[nb_ligne][nb_colonne-1] = decors.eau;
-		matrice_indice[nb_ligne][nb_colonne-1] = 3;
-
-		matrice_affichage[nb_ligne-1][nb_colonne-1] = decors.eau;
-		matrice_indice[nb_ligne-1][nb_colonne-1] = 3;
-
-		matrice_affichage[nb_ligne+1][nb_colonne-1] = decors.eau;
-		matrice_indice[nb_ligne+1][nb_colonne-1] = 3;
-
-		matrice_affichage[nb_ligne-1][nb_colonne+1] = decors.eau;
-		matrice_indice[nb_ligne-1][nb_colonne+1] = 3;
-	}
-}
-
-/*Fonction pour placer les pions des deux joueurs*/
-sbires placer_pions(char matrice_affichage[N][N], int matrice_indice[N][N], sbires sbire_bleu, sbires sbire_rouge){
-
-	const int a = 0, i = 10;
-	int b = 0, j = 0;
-	
-	b = (rand() % (MAX_pion - MIN_pion + 1)) + MIN;
+	for(int i = 0; i < N; i++){
+		printf("\n");
+		for(int j = 0; j < N; j++){
+			printf("| ");
+			if((i == nb_ligne) && (j == nb_colonne)){
+				for(int a = 0; a<qts_eau; a++){
+					printf("~");
+					mat[i][j] = 2;
+				}
+			}
 			
-	matrice_affichage[a][b] = sbire_bleu.symbole;
-	matrice_indice[a][b] = 1;
-	sbire_bleu.position[0] = a;
-	sbire_bleu.position[1] = b;
-
-	j = (rand() % (MAX_pion - MIN_pion + 1)) + MIN;
-
-	matrice_affichage[i][j] = sbire_rouge.symbole;
-	matrice_indice[i][j] = 1;
-	sbire_rouge.position[0] = i;
-	sbire_rouge.position[1] = j;
-	
-	return(sbire_rouge);
+			if( (i == sbire.position[0]) && (j == sbire.position[1]) ){
+				printf("X ");
+				mat[i][j] = 10;
+			} else if((i == dummy.position[0]) && (j == dummy.position[1])){
+				printf("D ");
+				mat[i][j] = 20;
+			} else {
+				printf("  ");
+				mat[i][j] = 0;
+			}
+		}
+		printf("|");
+	}
+	printf("\n\n");
 }
 
-/*Fonction afficher la matrice*/
-void afficher_matrice(char matrice_affichage[N][N]){
-	int i, j;
-	for (i=0; i<N; i++){
-		for(j=0; j<N; j++){
-			printf("%c", matrice_affichage[i][j]);
-		}
-		printf("\n");
+int positionner_sbire(sbires_t sbire, int mat[N][N]){
+/*Fonction de positionnement d'unité - Version Test*/
+	if(mat[sbire.position[0]][sbire.position[1]] == 0){
+		return 1;
+	} else {
+		printf("La case %i - %i est déjà occupée\n", sbire.position[0], sbire.position[1]);
+		return 0;
 	}
 }
 
-/*Fonction afficher la matrice*/
-void afficher_matrice_indice(int matrice_indice[N][N]){
-	int i, j;
-	for (i=0; i<N; i++){
-		for(j=0; j<N; j++){
-			printf("%i", matrice_indice[i][j]);
+sbires_t init_armee(sbires_t sbire, int mat[N][N]){
+/*Fonction d'initialisation d'unités - Version Test*/
+	int poser = 0;
+	sbire.nom = malloc(sizeof(char)*128);
+	printf("\nNom de l'unité : ");
+	scanf("%s", sbire.nom);
+	if( (strcmp(sbire.nom, "dummy") == 0) || (strcmp(sbire.nom, "Dummy") == 0) ){
+		sbire.attaque = 0;
+		sbire.defense = 10;
+		sbire.vie = 50;
+		sbire.mana = 0;
+		sbire.esquive = 10;
+		sbire.nbr_depl = 0;
+		sbire.position[0] = 5;
+		sbire.position[1] = 6;
+		poser = positionner_sbire(sbire, mat);
+		printf("\nThat's one good sturdy dummy !\n");
+	} else {
+		sbire.attaque = 30;
+		sbire.defense = 20;
+		sbire.vie = 50;
+		sbire.mana = 20;
+		sbire.esquive = 30;
+		sbire.nbr_depl = 5;
+		printf("Position de départ : \n");
+		while(poser == 0){
+			for(int n = 0; n < 2; n++){
+				if(n == 0){
+					printf("Ligne : ");
+				} else {
+					printf("Colonne : ");
+				}
+				scanf("%i", &sbire.position[n]);
+			}
+			poser = positionner_sbire(sbire, mat);
 		}
-		printf("\n");
 	}
+	printf("\nSbire %s créé : \n", sbire.nom);
+	printf("Attaque : %i \nDefense : %i \nMana : %i \nVie : %i \nTaux d'esquive : %i pourcents\nNombre de pas possibles : %i \n", sbire.attaque, sbire.defense, sbire.mana, sbire.vie, sbire.esquive, sbire.nbr_depl);
+	return sbire;
 }
+
