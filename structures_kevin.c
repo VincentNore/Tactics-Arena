@@ -60,11 +60,11 @@ sbires inventaire(sbires sbire_bleu){
 	
 		 case 1 : if (sbire_bleu.vie > 0){
 			  	if (sbire_bleu.mana > 4){
-					{ sbire_bleu.attaque = sbire_bleu.attaque + 28;
-			    		sbire_bleu.mana = sbire_bleu.mana -3;
-					sbire_rouge = Combat_magique(sbire_bleu,sbire_rouge);
-					sbire_bleu.attaque = 1;	
-			   
+					{ sbire_bleu.attaque = sbire_bleu.attaque +1000;
+			    		
+					sbire_rouge = Combat_magique(sbire_bleu,sbire_rouge);		
+					sbire_bleu.mana = sbire_bleu.mana -4;
+			   		
 			      		 printf("\t dragon punch utilisé\n");
 				 }
 				}else printf("\t le sbire manque de mana, action impossible\n");break;
@@ -77,29 +77,35 @@ sbires inventaire(sbires sbire_bleu){
 
 
 sbires Combat_physique(sbires sbire_bleu, sbires sbire_rouge){
+	srand(time(NULL));
 	int degats;
 	printf("%s attaque %s\n", sbire_bleu.nom, sbire_rouge.nom);
 	degats = ( sbire_bleu.attaque - (sbire_rouge.defense));
 	if(degats < 0){
 		degats = 0;
 	}
-	if( (rand()%(10 - 1) + 1) >= sbire_rouge.esquive ){ 
-		sbire_rouge.vie = sbire_rouge.vie - degats;
-		if(sbire_rouge.vie < 0){
-			sbire_rouge.vie = 0;
-		}
-		printf("%s reçoit %i dégats\n", sbire_rouge.nom, degats);
-		printf("Il reste %i PVs à %s\n", sbire_rouge.vie, sbire_rouge.nom);
-	} else printf("%s a esquivé !\n", sbire_rouge.nom);
+	if( (rand()%(10 - 1) + 1) > sbire_rouge.defense ){ 
+		if( (rand()%(10 - 1) + 1) > sbire_rouge.esquive ){ 
+			sbire_rouge.vie = sbire_rouge.vie - degats;
+			if(sbire_rouge.vie < 0){
+				sbire_rouge.vie = 0;
+			}
+			printf("%s reçoit %i dégats\n", sbire_rouge.nom, degats);
+			printf("Il reste %i PVs à %s\n", sbire_rouge.vie, sbire_rouge.nom);
+		} else printf("%s a esquivé !\n", sbire_rouge.nom); 
+	} else printf("%s a bloqué  !\n", sbire_rouge.nom);
+		
+	
 	return sbire_rouge;
 }
 
 
 
 sbires Combat_magique(sbires sbire_bleu, sbires sbire_rouge){
+	srand(time(NULL));
 	int degats;
 	printf("%s attaque %s\n", sbire_bleu.nom, sbire_rouge.nom);
-	degats = ( ( sbire_bleu.attaque*(sbire_bleu.mana/2) ) - sbire_rouge.defense )/10;
+	degats = ( ( sbire_bleu.attaque*(sbire_bleu.mana/2) ) )/10;
 	if(degats < 0){
 		degats = 0;
 	}
@@ -142,19 +148,19 @@ int main(){
 	sbires sbire_bleu;
 	
 	sbire_bleu.nom = "lol_bleu";
-	sbire_bleu.attaque = 2;
+	sbire_bleu.attaque = 5;
 	sbire_bleu.vie= 5;
 	sbire_bleu.defense= 4;
 	sbire_bleu.esquive= 2;
-	sbire_bleu.mana= 0;
+	sbire_bleu.mana= 5;
 
 	sbires sbire_rouge;
 
 	sbire_rouge.nom = "lol_rouge";
 	sbire_rouge.attaque = 1;
-	sbire_rouge.vie= 10;
-	sbire_rouge.defense= 2;
-	sbire_rouge.esquive= 8;
+	sbire_rouge.vie= 1;
+	sbire_rouge.defense= 4;
+	sbire_rouge.esquive= 3;
 	sbire_rouge.mana= 8;	
 
 structures(sbire_bleu,sbire_rouge);
