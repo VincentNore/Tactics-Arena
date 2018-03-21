@@ -64,7 +64,8 @@ sbires * inventaire(sbires * sbire_bleu){
 			    		
 					sbire_rouge = Combat_magique(sbire_bleu,sbire_rouge);		
 					sbire_bleu->mana = sbire_bleu->mana -4;
-			   		
+			   		sbire_bleu->attaque = sbire_bleu->attaque - 40;
+					
 			      		 printf("\t dragon punch utilisé\n");
 				 }
 				}else printf("\t le sbire manque de mana, action impossible\n");break;
