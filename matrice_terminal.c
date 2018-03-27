@@ -73,7 +73,7 @@ void placer_decors(int mat[N][N], decors_t decors){
 }
 
 /*Fonction afficher la matrice*/
-int afficher_matrice(int mat[N][N], sbires_t sbire, sbires_t dummy, decors_t decors){
+int afficher_matrice(int mat[N][N], sbires_t sbire_10, sbires_t dummy, decors_t decors){
 
 	int nb_colonne = (rand() % (MAX - MIN + 1)) + MIN;
 	int nb_ligne = (rand() % (MAX - MIN + 1)) + MIN;
@@ -83,14 +83,14 @@ int afficher_matrice(int mat[N][N], sbires_t sbire, sbires_t dummy, decors_t dec
 		printf("\n");
 		for(int j = 0; j < N; j++){
 			printf("| ");
-			if((i == nb_ligne) && (j == nb_colonne)){
+			/*if((i == nb_ligne) && (j == nb_colonne)){
 				for(int a = 0; a<qts_eau; a++){
 					printf("~");
 					mat[i][j] = 2;
 				}
-			}
+			}*/
 			
-			if( (i == sbire.position[0]) && (j == sbire.position[1]) ){
+			if((i == sbire_10.position[0]) && (j == sbire_10.position[1])){
 				printf("X ");
 				mat[i][j] = 10;
 			} else if((i == dummy.position[0]) && (j == dummy.position[1])){
@@ -106,23 +106,23 @@ int afficher_matrice(int mat[N][N], sbires_t sbire, sbires_t dummy, decors_t dec
 	printf("\n\n");
 }
 
-int positionner_sbire(sbires_t sbire, int mat[N][N]){
+int positionner_sbire(sbires_t sbire_10, int mat[N][N]){
 /*Fonction de positionnement d'unité - Version Test*/
-	if(mat[sbire.position[0]][sbire.position[1]] == 0){
+	if(mat[sbire_10.position[0]][sbire_10.position[1]] == 0){
 		return 1;
 	} else {
-		printf("La case %i - %i est déjà occupée\n", sbire.position[0], sbire.position[1]);
+		printf("La case %i - %i est déjà occupée\n", sbire_10.position[0], sbire_10.position[1]);
 		return 0;
 	}
 }
 
-sbires_t init_armee(sbires_t sbire, int mat[N][N]){
+sbires_t init_armee(sbires_t sbire_10, int mat[N][N]){
 /*Fonction d'initialisation d'unités - Version Test*/
 	int poser = 0;
-	sbire.nom = malloc(sizeof(char)*128);
+	sbire_10.nom = malloc(sizeof(char)*128);
 	printf("\nNom de l'unité : ");
-	scanf("%s", sbire.nom);
-	if( (strcmp(sbire.nom, "dummy") == 0) || (strcmp(sbire.nom, "Dummy") == 0) ){
+	scanf("%s", sbire_10.nom);
+	/*if( (strcmp(sbire.nom, "dummy") == 0) || (strcmp(sbire.nom, "Dummy") == 0) ){
 		sbire.attaque = 0;
 		sbire.defense = 10;
 		sbire.vie = 50;
@@ -133,13 +133,14 @@ sbires_t init_armee(sbires_t sbire, int mat[N][N]){
 		sbire.position[1] = 6;
 		poser = positionner_sbire(sbire, mat);
 		printf("\nThat's one good sturdy dummy !\n");
-	} else {
-		sbire.attaque = 30;
-		sbire.defense = 20;
-		sbire.vie = 50;
-		sbire.mana = 20;
-		sbire.esquive = 30;
-		sbire.nbr_depl = 5;
+	} else {*/
+	for(int i = 0; i < 5; i++){
+		sbire_10.attaque = 30;
+		sbire_10.defense = 20;
+		sbire_10.vie = 50;
+		sbire_10.mana = 20;
+		sbire_10.esquive = 30;
+		sbire_10.nbr_depl = 5;
 		printf("Position de départ : \n");
 		while(poser == 0){
 			for(int n = 0; n < 2; n++){
@@ -148,13 +149,13 @@ sbires_t init_armee(sbires_t sbire, int mat[N][N]){
 				} else {
 					printf("Colonne : ");
 				}
-				scanf("%i", &sbire.position[n]);
+				scanf("%i", &sbire_10.position[n]);
 			}
-			poser = positionner_sbire(sbire, mat);
+			poser = positionner_sbire(sbire_10, mat);
 		}
 	}
-	printf("\nSbire %s créé : \n", sbire.nom);
-	printf("Attaque : %i \nDefense : %i \nMana : %i \nVie : %i \nTaux d'esquive : %i pourcents\nNombre de pas possibles : %i \n", sbire.attaque, sbire.defense, sbire.mana, sbire.vie, sbire.esquive, sbire.nbr_depl);
-	return sbire;
+	printf("\nSbire %s créé : \n", sbire_10.nom);
+	printf("Attaque : %i \nDefense : %i \nMana : %i \nVie : %i \nTaux d'esquive : %i pourcents\nNombre de pas possibles : %i \n", sbire_10.attaque, sbire_10.defense, sbire_10.mana, sbire_10.vie, sbire_10.esquive, sbire_10.nbr_depl);
+	return sbire_10;
 }
 
