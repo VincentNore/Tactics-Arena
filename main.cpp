@@ -7,9 +7,13 @@
 
 int main(int argc, char *argv[])
 {
-    SDL_Surface *ecran = NULL;
+    SDL_Surface *ecran = NULL, *zozor = NULL;
 
     SDL_Event event;
+
+    SDL_Rect positionZozor;
+
+
 
     int continuer=1;
 
@@ -21,7 +25,7 @@ int main(int argc, char *argv[])
 
 
 
-    ecran = SDL_SetVideoMode(800,600,32,SDL_HWSURFACE);
+    ecran = SDL_SetVideoMode(640,480,32,SDL_HWSURFACE | SDL_DOUBLEBUF);
 
     if(ecran == NULL)
     {
@@ -30,23 +34,42 @@ int main(int argc, char *argv[])
 
     }
 
-
+    zozor= SDL_LoadBMP("zozor.bmp");
+    SDL_SetColorKey(zozor,SDL_SRCCOLORKEY,SDL_MapRGB(zozor->format,0,0,255));
     SDL_WM_SetCaption("Gestion events SDL",NULL);
 
+    positionZozor.x= ecran->w /2 - zozor->w /2;
+    positionZozor.y= ecran->h /2 - zozor->h /2;
+    SDL_EnableKeyRepeat(10,10);
     while(continuer)
     {
         SDL_WaitEvent(&event);
-        switch(event.key.keysym.sym)
+        switch(event.type)
         {
-
-            case SDLK_ESCAPE:
+            case SDL_QUIT:
                 continuer=0;
                 break;
+
+            case SDL_MOUSEBUTTONUP:
+                if(event.button.button == SDL_BUTTON_RIGHT)
+
+                    continuer = 0;
+                break;
+
+            case SDL_MOUSEMOTION:
+                positionZozor.x = event.motion.x;
+                positionZozor.y = event.motion.y;
+
         }
+
+        SDL_FillRect(ecran,NULL,SDL_MapRGB(ecran->format,255,255,255));
+        SDL_BlitSurface(zozor,NULL,ecran,&positionZozor);
+        SDL_Flip(ecran);
+
     }
 
 
-
+    SDL_FreeSurface(zozor);
     SDL_Quit(); //Arrêt de la SDL
 
     return EXIT_SUCCESS;
