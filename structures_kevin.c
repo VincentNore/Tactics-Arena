@@ -4,6 +4,22 @@
 #include<time.h>
 #include"structures_kevin.h"
 
+
+sbires * detection_mort(sbires * sbire_bleu, sbires * sbire_rouge){
+	if(sbire_rouge->vie == 0){
+		printf("%s est mort\n", sbire_rouge->nom);
+		free(sbire_rouge);
+		sbire_rouge = NULL;
+		
+	}
+	if(sbire_bleu->vie == 0){
+		printf("%s est mort\n", sbire_bleu->nom);
+		free(sbire_bleu);
+		sbire_rouge = NULL;
+		
+	}
+}
+
 sbires * inventaire(sbires * sbire_bleu){
 	int potion_soins =5;
 	int nb_gemme = 5;
@@ -40,7 +56,6 @@ sbires * inventaire(sbires * sbire_bleu){
 	return(sbire_bleu); 
 }
 
-
 	sbires * competences(sbires * sbire_bleu,sbires * sbire_rouge){
 		int competences;
 		printf("\t choissisez une compétence à utiliser :\n"); 
@@ -53,11 +68,13 @@ sbires * inventaire(sbires * sbire_bleu){
 			  { sbire_bleu->attaque = sbire_bleu->attaque +3;
 			   sbire_rouge = Combat_physique(sbire_bleu,sbire_rouge);
 			    sbire_bleu->attaque = 1;
-			    return(sbire_rouge);
+			    
 			       printf("\t attaque automatique utilisé\n");
 				
 			  }
-			else printf("\t le sbire est mort, action impossible\n");break;
+			else printf("\t le sbire est mort, action impossible\n");
+			detection_mort(sbire_bleu,sbire_rouge);			
+			break;
 	
 		 case 1 : if (sbire_bleu->vie > 0){
 			  	if (sbire_bleu->mana > 4){
@@ -71,12 +88,54 @@ sbires * inventaire(sbires * sbire_bleu){
 				 }
 				}else printf("\t le sbire manque de mana, action impossible\n");break;
 			  
-			}else printf("\t le sbire est mort, action impossible\n");break;
+			}else printf("\t le sbire est mort, action impossible\n");
+			detection_mort(sbire_bleu,sbire_rouge);
+			break;
 		 default:printf("ERROR\n");
 	}
 	return(sbire_bleu,sbire_rouge); 
 }
 
+
+	sbires * competences2(sbires * sbire_bleu,sbires * sbire_rouge){
+		int competences;
+		printf("\t choissisez une compétence à utiliser :\n"); 
+		printf("\t 0:attaque automatique | 1:dragon punch :\n");
+		scanf("%d",&competences);
+		switch(competences)
+
+	 { 
+		 case 0 : if (sbire_rouge->vie > 0)
+			  { sbire_rouge->attaque = sbire_rouge->attaque +3;
+			   sbire_bleu = Combat_physique2(sbire_bleu,sbire_rouge);
+			    sbire_rouge->attaque = 1;
+			    
+			       printf("\t attaque automatique utilisé\n");
+				
+			  }
+			else printf("\t le sbire est mort, action impossible\n");
+			detection_mort(sbire_bleu,sbire_rouge);			
+			break;
+	
+		 case 1 : if (sbire_rouge->vie > 0){
+			  	if (sbire_rouge->mana > 4){
+					{ sbire_rouge->attaque = sbire_rouge->attaque + 40;
+			    		
+					sbire_rouge = Combat_magique2(sbire_bleu,sbire_rouge);		
+					sbire_rouge->mana = sbire_rouge->mana -4;
+			   		sbire_rouge->attaque = sbire_rouge->attaque - 40;
+					
+			      		 printf("\t dragon punch utilisé\n");
+				 }
+				}else printf("\t le sbire manque de mana, action impossible\n");break;
+			  
+			}else printf("\t le sbire est mort, action impossible\n");
+			detection_mort(sbire_bleu,sbire_rouge);
+			break;
+		 default:printf("ERROR\n");
+	}
+	return(sbire_bleu,sbire_rouge); 
+}
 
 sbires * Combat_physique(sbires * sbire_bleu, sbires *sbire_rouge){
 	int degats;
@@ -100,7 +159,27 @@ sbires * Combat_physique(sbires * sbire_bleu, sbires *sbire_rouge){
 	return sbire_rouge;
 }
 
-
+sbires * Combat_physique2(sbires * sbire_bleu, sbires *sbire_rouge){
+	int degats;
+	printf("%s attaque %s\n", sbire_rouge->nom, sbire_bleu->nom);
+	degats = ( sbire_rouge->attaque - (sbire_bleu->defense));
+	if(degats < 0){
+		degats = 0;
+	}
+	if( (rand()%(10 - 1) + 1) > sbire_bleu->defense ){ 
+		if( (rand()%(10 - 1) + 1) > sbire_bleu->esquive ){ 
+			sbire_rouge->vie = sbire_bleu->vie - degats;
+			if(sbire_bleu->vie < 0){
+				sbire_bleu->vie = 0;
+			}
+			printf("%s reçoit %i dégats\n", sbire_bleu->nom, degats);
+			printf("Il reste %i PVs à %s\n", sbire_bleu->vie, sbire_bleu->nom);
+		} else printf("%s a esquivé !\n", sbire_bleu->nom); 
+	} else printf("%s a bloqué  !\n", sbire_bleu->nom);
+		
+	
+	return sbire_bleu;
+}
 
 sbires * Combat_magique(sbires * sbire_bleu, sbires * sbire_rouge){
 	int degats;
@@ -120,6 +199,26 @@ sbires * Combat_magique(sbires * sbire_bleu, sbires * sbire_rouge){
 		printf("%s a esquivé !\n", sbire_rouge->nom);
 	}
 	return sbire_rouge;
+}
+
+sbires * Combat_magique2(sbires * sbire_bleu, sbires * sbire_rouge){
+	int degats;
+	printf("%s attaque %s\n", sbire_bleu->nom, sbire_rouge->nom);
+	degats = ( ( sbire_rouge->attaque*(sbire_rouge->mana/2) ) )/10;
+	if(degats < 0){
+		degats = 0;
+	}
+	if( (rand()%(10 - 1) + 1) > sbire_bleu->esquive ){ 
+		sbire_bleu->vie = sbire_bleu->vie - degats;
+		printf("%s reçoit %i dégats magiques\n", sbire_bleu->nom, degats);
+		if(sbire_bleu->vie < 0){
+			sbire_bleu->vie = 0;
+		}
+		printf("Il reste %i PVs à %s\n", sbire_bleu->vie, sbire_bleu->nom);
+	} else {
+		printf("%s a esquivé !\n", sbire_bleu->nom);
+	}
+	return sbire_bleu;
 }
 
 
@@ -145,17 +244,10 @@ void structures(sbires * sbire_bleu, sbires * sbire_rouge)
 	printf("la mana du sbire rouge est donc %d.\n",sbire_rouge->mana);
 }
 
-/* A FAIRE : Lier la detection_mort à la selection des unitées pour pouvoir liberer les structures morts et gagner de la mémoire.
-sbires * detection_mort(sbires * sbire_bleu, sbires * sbire_rouge){
-	if(sbire_rouge->vie == 0){
-		printf("%s est mort\n", sbire_rouge->nom);
-		free(sbire_rouge);
-		sbire_rouge = NULL;
-		
-	}
-}
+/*A FAIRE : Lier la detection_mort à la selection des unitées pour pouvoir liberer les structures morts et gagner de la mémoire.
 */
 
+/*
 int main(){
 srand(time(NULL));
 	sbires * sbire_bleu;
@@ -181,6 +273,8 @@ srand(time(NULL));
 structures(sbire_bleu,sbire_rouge);
 sbire_bleu = inventaire(sbire_bleu);
 /*detection_mort(sbire_bleu,sbire_rouge);*/
+/*
 sbire_bleu,sbire_rouge = competences(sbire_bleu,sbire_rouge);
-structures(sbire_bleu,sbire_rouge);
-}
+structures(sbire_bleu,sbire_rouge); 
+} 
+*/

@@ -5,10 +5,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include"structures_kevin.h"
 
 /* Fonction de sélection d'unité par tour */
 
-void ChoixUnite(int tour){
+sbires * ChoixUnite(int tour, sbires * sbire_rouge, sbires * sbire_bleu){
 	int c; /*Choix du joueur*/
 	int u; /* numéro de l'unité */
 	if(tour == 1){ /* Si tour = 1 , le joueur 1 joue, sinon, le joueur 2 joue*/
@@ -21,7 +22,8 @@ void ChoixUnite(int tour){
 		
 		switch(u)
 		{
-		case 1: printf("Vous avez selectionné l'unité 1.\n\n"); break;
+		case 1:	
+			printf("Vous avez selectionné l'unité 1.\n\n"); break;
 		case 2: printf("Vous avez selectionné l'unité 2.\n\n"); break;
 		case 3: printf("Vous avez selectionné l'unité 3.\n\n"); break;
 		case 4: printf("Vous avez selectionné l'unité 4.\n\n"); break;
@@ -36,7 +38,12 @@ void ChoixUnite(int tour){
 	
 		switch(c)
 		{
-		case 1: printf("Vous attaquez avec l'unité %d.\n\n",u); break;
+		case 1: printf("Vous attaquez avec l'unité %d.\n\n",u); 
+			structures(sbire_bleu,sbire_rouge);
+		 	sbire_bleu = inventaire(sbire_bleu);
+		 	sbire_bleu,sbire_rouge = competences(sbire_bleu,sbire_rouge);
+		 	structures(sbire_bleu,sbire_rouge);			
+			break;
 		case 2: printf("Vous deplacez l'unité %d.\n\n",u); break;
 		}
 				
@@ -64,8 +71,12 @@ void ChoixUnite(int tour){
 	
 		switch(c)
 		{
-		case 1: 
-			printf("Vous attaquez avec l'unité %d.\n\n",u); break;
+		case 1: printf("Vous attaquez avec l'unité %d.\n\n",u);
+			structures(sbire_bleu,sbire_rouge);
+		 	sbire_bleu = inventaire(sbire_bleu);
+		 	sbire_bleu,sbire_rouge = competences2(sbire_bleu,sbire_rouge);
+		 	structures(sbire_bleu,sbire_rouge);
+			break;
 		case 2: printf("Vous deplacez l'unité %d.\n\n",u); break;
 		}	
 
@@ -99,13 +110,13 @@ int DebutPartie(int tour){
 	{
 		printf("Joueur 1 commence !\n");
 		tour = 1;
-		ChoixUnite(tour);
+		
 	}
 	else if(de1 < de2)	/* Tour du joueur 2 */
 	{
 		printf("Joueur 2 commence !\n");
 		tour = 0;
-		ChoixUnite(tour);
+		
 	}
 	return tour;
 	
