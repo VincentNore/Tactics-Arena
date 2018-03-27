@@ -3,17 +3,21 @@
 
 #define N 11
 
+typedef struct armee_s{
+		struct sbires_s;
+		}armee_t;
+
 typedef struct sbires_s{
 		char * nom;
 		char symbole;
 		int attaque;
 		int vie;
 		int defense;
-		int esquive; 
+		int esquive;
 		int mana;
 		int nbr_depl;
 		int position[2];
-		} sbires_t; 
+		} sbires_t;
 
 typedef struct decors_s{
 		char eau; 
