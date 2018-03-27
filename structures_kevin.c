@@ -40,6 +40,7 @@ sbires * inventaire(sbires * sbire_bleu){
 	return(sbire_bleu); 
 }
 
+
 	sbires * competences(sbires * sbire_bleu,sbires * sbire_rouge){
 		int competences;
 		printf("\t choissisez une compétence à utiliser :\n"); 
