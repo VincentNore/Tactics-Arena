@@ -19,4 +19,4 @@ Les attaques sont divisées en 2 catégories relativement simples :
 -Les attaques physiques reposant sur la force du pion attaquant.
 -Les attaques magiques reposant sur l'énergie magique (ici mana) du pion attaquant.
 
-Les déplacements sont linéaires avec possibilité de changer de direction mais il leur est impossible de revenir en arrière.
+Les déplacements sont linéaires avec possibilité de changer de direction.
