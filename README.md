@@ -11,9 +11,9 @@ Tactics Arena  est un jeu de stratégie tour par tour virtuel ou l'on joue en du
 
 Règles du jeu:
 
-Le jeu se joue avec 2 joueurs (Réels ou un joueur Réel et une IA) sur un plateau de jeu carrée de dimension NxN (N valant 11 par défaut).
-Chaque joueur possède sa propre armée de n pions et chaque pion possède ses propres caractéristiques.
-Les joueurs peuvent déplacer leurs pions, réfléchir à leur stratégie, restaurer la santé et/l'énergie de leurs pions et/attaquer les pions adverses à leur portée.
+Le jeu se joue avec 2 joueurs (Réels) sur un plateau de jeu carrée de dimension 11 par 11.
+Chaque joueur possède sa propre armée de 5 pions et chaque pion possède ses propres caractéristiques.
+Les joueurs peuvent déplacer leurs pions, réfléchir à leur stratégie, restaurer la santé et l'énergie de leurs pions et attaquer les pions adverses à leur portée.
 
 Les attaques sont divisées en 2 catégories relativement simples :
 -Les attaques physiques reposant sur la force du pion attaquant.
