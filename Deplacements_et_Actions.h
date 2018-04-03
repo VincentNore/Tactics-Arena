@@ -119,10 +119,12 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
 			printf("Horizontal gauche : ");
 
-			for(int n = 1; (mat[sbires.position[0]][(sbires.position[1] - n)] == 0) && (nbr_cases < nb_dep) ; n++){
+			for(int n = 1; (mat[sbires.position[0]][(sbires.position[1] - n)] == 0) && (nbr_cases < (nb_dep - 1)); n++){
 
 				if( ((sbires.position[1] - nbr_cases) > 0) && (sbires.position[1] > 0) ){ /*Prise en compte des bords de la matrice*/
+
 					nbr_cases++;
+
 				}
 
 			}
@@ -150,13 +152,15 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 				/*Mise à jour de la matrice et de la position du sbire*/
 				mat[sbires.position[0]][sbires.position[1]] = 0;
 				sbires.position[1] = sbires.position[1] - nbr_cap;
+				if(sbires.position[1] < 0){
+					sbires.position[1] = 0;
+				}
 				mat[sbires.position[0]][sbires.position[1]] = 1;
-				nbr_cases = nbr_cases - nbr_cap;
 
 				/*Prise en compte des déplacements restants ci-dessous*/
-				if( (nb_dep - nbr_cases > 0) && (nbr_cases > 0) ){
+				if( (nb_dep - nbr_cases > 0) || ( (nbr_cases - nbr_cap) > 0) ){
 
-					printf("%i déplacements encore possibles, voulez-vous continuer ?\n\t(Retour en arrière IMPOSSIBLE)\n(Y/N) : ", (nb_dep - nbr_cases));
+					printf("%i déplacements encore possibles, voulez-vous continuer ?\n\t(Retour en arrière IMPOSSIBLE)\n(Y/N) : ", (nb_dep - nbr_cap));
 					scanf("%s", dir);
 
 					if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
@@ -193,7 +197,7 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 
 			for(int n = 1 ; (mat[sbires.position[0]][(sbires.position[1] + n)] == 0) && (nbr_cases < nb_dep) ; n++){
 
-				if( ((sbires.position[1] + nbr_cases) < N) && (sbires.position[1] < N)) { /*Prise en compte des bords de la matrice*/
+				if( ((sbires.position[1] + nbr_cases) < 10) && (sbires.position[1] < 10) ) { /*Prise en compte des bords de la matrice*/
 
 					nbr_cases++;
 
@@ -224,13 +228,15 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 				/*Mise à jour de la matrice et de la position du sbire*/
 				mat[sbires.position[0]][sbires.position[1]] = 0;
 				sbires.position[1] = sbires.position[1] + nbr_cap;
+				if(sbires.position[1] >= 11){
+					sbires.position[1] = 10;
+				}
 				mat[sbires.position[0]][sbires.position[1]] = 1;
-				nbr_cases = nbr_cases - nbr_cap;
 
 				/*Prise en compte des déplacements restants ci-dessous*/
-				if( (nb_dep - nbr_cases > 0) && (nbr_cases > 0) ){
+				if( (nb_dep - nbr_cases > 0) || ( (nbr_cases - nbr_cap) > 0) ){
 
-					printf("%i déplacements encore possibles, voulez-vous continuer ?\n\t(Retour en arrière IMPOSSIBLE)\n(Y/N) : ", (nb_dep - nbr_cases));
+					printf("%i déplacements encore possibles, voulez-vous continuer ?\n\t(Retour en arrière IMPOSSIBLE)\n(Y/N) : ", (nb_dep - nbr_cap));
 					scanf("%s", dir);
 
 					if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
@@ -281,7 +287,7 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
 			printf("Vertical haut : ");
 
-			for(int n = 1 ; (mat[(sbires.position[0] - n)][sbires.position[1]] == 0) && (nbr_cases < nb_dep) ; n++){
+			for(int n = 1 ; (mat[(sbires.position[0] - n)][sbires.position[1]] == 0) && (nbr_cases < (nb_dep - 1)) ; n++){
 
 				if( ((sbires.position[0] - nbr_cases) > 0) && (sbires.position[0] > 0)){ /*Prise en compte des bords de la matrice*/
 
@@ -314,13 +320,15 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 				/*Mise à jour de la matrice et de la position du sbire*/
 				mat[sbires.position[0]][sbires.position[1]] = 0;
 				sbires.position[0] = sbires.position[0] - nbr_cap;
+				if(sbires.position[0] < 0){
+					sbires.position[0] = 0;
+				}
 				mat[sbires.position[0]][sbires.position[1]] = 1;
-				nbr_cases = nbr_cases - nbr_cap;
 
 				/*Prise en compte des déplacements restants ci-dessous*/
-				if( (nb_dep - nbr_cases > 0) && (nbr_cases > 0) ){
+				if( (nb_dep - nbr_cases > 0) || ( (nbr_cases - nbr_cap) > 0) ){
 
-					printf("%i déplacements encore possibles, voulez-vous continuer ?\n\t(Retour en arrière IMPOSSIBLE)\n(Y/N) : ", (nb_dep - nbr_cases));
+					printf("%i déplacements encore possibles, voulez-vous continuer ?\n\t(Retour en arrière IMPOSSIBLE)\n(Y/N) : ", (nb_dep - nbr_cap));
 					scanf("%s", dir);
 
 					if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
@@ -354,9 +362,9 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {	
 			printf("Vertical bas : ");
 
-			for(int n = 1 ; (mat[(sbires.position[0] + n)][sbires.position[1]] == 0) && (nbr_cases < nb_dep) ; n++){
+			for(int n = 1 ; (mat[(sbires.position[0] + n)][sbires.position[1]] == 0) && (nbr_cases < (nb_dep - 1)) ; n++){
 
-				if( ((sbires.position[0] + nbr_cases) < N) && (sbires.position[0] < N)){ /*Prise en compte des bords de la matrice*/
+				if( ((sbires.position[0] + nbr_cases) < 10) && (sbires.position[0] < 10)){ /*Prise en compte des bords de la matrice*/
 
 					nbr_cases++;
 
@@ -387,13 +395,15 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 				/*Mise à jour de la matrice et de la position du sbire*/
 				mat[sbires.position[0]][sbires.position[1]] = 0;
 				sbires.position[0] = sbires.position[0] + nbr_cap;
+				if(sbires.position[0] >= 11){
+					sbires.position[0] = 10;
+				}
 				mat[sbires.position[0]][sbires.position[1]] = 1;
-				nbr_cases = nbr_cases - nbr_cap;
 
 				/*Prise en compte des déplacements restants ci-dessous*/
-				if( (nb_dep - nbr_cases > 0) && (nbr_cases > 0) ){
+				if( (nb_dep - nbr_cases > 0) || ( (nbr_cases - nb_dep) > 0) ){
 
-					printf("%i déplacements encore possibles, voulez-vous continuer ?\n\t(Retour en arrière IMPOSSIBLE)\n(Y/N) : ", (nb_dep - nbr_cases));
+					printf("%i déplacements encore possibles, voulez-vous continuer ?\n\t(Retour en arrière IMPOSSIBLE)\n(Y/N) : ", (nb_dep - nbr_cap));
 					scanf("%s", dir);
 
 					if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
