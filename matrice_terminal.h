@@ -28,24 +28,12 @@ typedef struct armee_s{
 		sbires_t Z;
 		}armee_t;
 
-typedef struct decors_s{
-		char eau; 
-		char pierre;
-		}decors_t;
-	
-typedef struct joueurs_s{
-		char pion; 
-		int position_ligne;
-		int position_colonne;
-		}joueurs_t;
 	
 void init_matrice();
 
 armee_t init_armee(armee_t armee, sbires_t sbire, int mat[N][N]);
 sbires_t init_sbire(sbires_t sbire, int mat[N][N]);
 
-void placer_decors();
+int afficher_matrice(int mat[N][N], armee_t armee);
 
-int afficher_matrice(int mat[N][N], armee_t armee, decors_t decors);
-
-int positionner_sbire(sbires_t sbire, int mat[N][N]);
+sbires_t positionner_sbire(sbires_t sbire, int mat[N][N]);
