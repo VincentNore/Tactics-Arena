@@ -2,22 +2,38 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include"structures.h"
+#include "../include/structures.h"
 
-/* Fonction de sélection d'unité par tour */
+/**
+*\file ChoixJoueur.c
+*\author El Kandoussi Adnan
+*\date 6 avril 2018
+*\version 1.0
+*\brief Définie le choix du joueur qui débute et le choix du pion qui joue.
+*
+*\details Permet de choisir le joueur qui débute la partie en premier et de permettre au joueur de choisir le pion qui va effectuer une action.
+*
+*/
 
+/**
+*\brief Choisis le pion qui effectue une action.
+*\details Permet de choisir laisser le choix au joueur de choisir le pion dans sa liste pour effectuer une action.
+*\param int tour Connaitre le joueur qui commence à jouer en premier.
+*\param armee_t armee_j1 Contient les pions du joueur 1.
+*\param armee_t armee_j2 Contient les pions du joueur 2.
+*/
 sbires_t ChoixUnite(int tour, armee_t armee_j1, armee_t armee_j2){
-	int choix; /*Choix du joueur*/
 	int num; /* numéro de l'unité */
 	
+	/*Affichage des pions du joueur 1.*/
 	if(tour == 1){ /* Si tour = 1 , le joueur 1 joue, sinon, le joueur 2 joue*/
 		printf("C'est au tour du joueur 1\n\n");
 		printf("Selectionnez une unité :\n");
-		printf("1 - %s",armee_j1.A.nom);
-		printf("2 - %s",armee_j1.B.nom);
-		printf("3 - %s",armee_j1.C.nom);
-		printf("4 - %s",armee_j1.D.nom);
-		printf("5 - %s",armee_j1.E.nom);
+		printf("1 - %s\n",armee_j1.A.nom);
+		printf("2 - %s\n",armee_j1.B.nom);
+		printf("3 - %s\n",armee_j1.C.nom);
+		printf("4 - %s\n",armee_j1.D.nom);
+		printf("5 - %s\n",armee_j1.E.nom);
 		
 		scanf("%d",&num);
 		
@@ -48,13 +64,14 @@ sbires_t ChoixUnite(int tour, armee_t armee_j1, armee_t armee_j2){
 	}
 	
 	else if(tour == 0){
+		/*Affichage des pions du joueur 2.*/
 		printf("C'est au tour du joueur 2\n");
 		printf("Selectionnez une unité :\n");
-		printf("1 - %s",armee_j2.A.nom);
-		printf("2 - %s",armee_j2.B.nom);
-		printf("3 - %s",armee_j2.C.nom);
-		printf("4 - %s",armee_j2.D.nom);
-		printf("5 - %s",armee_j2.E.nom);
+		printf("1 - %s\n",armee_j2.A.nom);
+		printf("2 - %s\n",armee_j2.B.nom);
+		printf("3 - %s\n",armee_j2.C.nom);
+		printf("4 - %s\n",armee_j2.D.nom);
+		printf("5 - %s\n",armee_j2.E.nom);
 		
 		scanf("%d",&num);
 		switch(num)
@@ -83,6 +100,12 @@ sbires_t ChoixUnite(int tour, armee_t armee_j1, armee_t armee_j2){
 	}
 }
 
+/**
+*\brief Choisis le joueur qui joue en premier.
+*\details Choisir aléatoirement le joueur qui débutera la partie en premier.
+*\param int tour Connaitre le joueur qui commence à jouer en premier.
+*/
+
 int DebutPartie(int tour){
 	
 	int de1,de2; /* dé des deux joueurs */
@@ -95,6 +118,8 @@ int DebutPartie(int tour){
 	de2 = rand()%10;
 	printf("Joueur 1 a obtenu un %i\n",de1);
 	printf("Joueur 2 a obtenu un %i\n",de2);
+
+	/*Vérification de l'égalité des deux joueurs*/
 	while(de1 == de2)
 	{
 		printf("Egalité !\n");

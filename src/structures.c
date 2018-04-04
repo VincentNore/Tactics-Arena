@@ -1,10 +1,28 @@
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<time.h>
-#include"structures.h"
+#include"../include/structures.h"
 
+/**
+*\file structures.c
+*\author Colin Kevin
+*\date 6 avril 2018
+*\version 1.0
+*\brief Fonctions permettant certaines actions du joueur.
+*
+*\details Fonctions pour les actions du pion courant.
+*
+*/
 
+/**
+*\brief Détecter si un pion est vivant.
+*\details Vérifier si un pion est toujours en vie sinon il est détruit et le joueur pert un pion.
+*\param sbires_t sbire La structure du pion courant.
+*\param armee_t armee_j1 Contient les pions du joueur 1.
+*\param armee_t armee_j2 Contient les pions du joueur 2.
+*\param int nb_pions_j1 Le nombre de pions du joueur 1.
+*\param int nb_pions_j2 Le nombre de pions du joueur 2.
+*/
 int detection_mort(sbires_t sbire, armee_t armee_j1, armee_t armee_j2, int nb_pions_j1, int nb_pions_j2){
 	if(armee_j1.A.vie == 0){
 		printf("%s est mort\n", sbire.nom);
@@ -76,8 +94,16 @@ int detection_mort(sbires_t sbire, armee_t armee_j1, armee_t armee_j2, int nb_pi
 		return (nb_pions_j2);
 			
 	}
+	else{
+		return 0;
+	}
 }
 
+/**
+*\brief Inventaire du joueur.
+*\details Permettre aux joueurs d'utiliser des objets dans un inventaire pour soigner ou rajouter des points de magie aux pions.
+*\param sbires_t sbire La structure du pion courant.
+*/
 sbires_t inventaire(sbires_t sbire){
 	int potion_soins =5;
 	int nb_gemme = 5;
@@ -131,6 +157,12 @@ sbires_t inventaire(sbires_t sbire){
 	return(sbire); 
 }
 
+/**
+*\brief Compétences spéciales des pions.
+*\details Les pions peuvent utiliser des compétences spéciales pour effectuer plus de dégâts sur l'ennemi.
+*\param sbires_t sbire La structure du pion courant.
+*\param sbires_t cible La structure de la cible.
+*/
 sbires_t competences(sbires_t sbire, sbires_t cible){
 		int competences;
 		printf("\t Choissisez une compétence à utiliser :\n"); 
@@ -173,59 +205,3 @@ sbires_t competences(sbires_t sbire, sbires_t cible){
 	return(cible); 
 }
 
-
-/*void structures(sbires * sbire_bleu, sbires * sbire_rouge)
-{
-	printf("\n");
-	printf("l'attaque du sbire bleu est donc de %d.\n",sbire_bleu->attaque);
-	printf("la vie du sbire bleu est donc de %d.\n",sbire_bleu->vie);
-	printf("la défense du sbire bleu est donc de %d.\n",sbire_bleu->defense);
-	printf("l'esquive du sbire bleu est donc de %d.\n",sbire_bleu->esquive);
-	printf("le nom du sbire bleu est donc %s.\n",sbire_bleu->nom);
-	printf("la mana du sbire bleu est donc %d.\n",sbire_bleu->mana);
-	
-	printf("--------------------------------------------------------------\n");
-	
-	printf("\n");
-	printf("l'attaque du sbire rouge est donc de %d.\n",sbire_rouge->attaque);
-	printf("la vie du sbire rouge est donc de %d.\n",sbire_rouge->vie);
-	printf("la défense du sbire rouge  est donc de %d.\n",sbire_rouge->defense);
-	printf("l'esquive du sbire rouge est donc de %d.\n",sbire_rouge->esquive);
-	printf("le nom du sbire rouge est donc %s.\n",sbire_rouge->nom);
-	printf("la mana du sbire rouge est donc %d.\n",sbire_rouge->mana);
-}/
-
-/*A FAIRE : Lier la detection_mort à la selection des unitées pour pouvoir liberer les structures morts et gagner de la mémoire.
-*/
-
-/*
-int main(){
-srand(time(NULL));
-	sbires * sbire_bleu;
-	sbire_bleu = malloc(sizeof(sbires));
-	
-	sbire_bleu->nom = "lol_bleu";
-	sbire_bleu->attaque = 5;
-	sbire_bleu->vie= 5;
-	sbire_bleu->defense= 4;
-	sbire_bleu->esquive= 2;
-	sbire_bleu->mana= 5;
-
-	sbires * sbire_rouge;
-	sbire_rouge = malloc(sizeof(sbires));
-
-	sbire_rouge->nom = "lol_rouge";
-	sbire_rouge->attaque = 1;
-	sbire_rouge->vie= 8;
-	sbire_rouge->defense= 2;
-	sbire_rouge->esquive= 1;
-	sbire_rouge->mana= 8;	
-
-structures(sbire_bleu,sbire_rouge);
-sbire_bleu = inventaire(sbire_bleu);
-/*detection_mort(sbire_bleu,sbire_rouge);*/
-/*
-sbire_bleu,sbire_rouge = competences(sbire_bleu,sbire_rouge);
-structures(sbire_bleu,sbire_rouge); 
-} 
-*/

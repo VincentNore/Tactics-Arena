@@ -3,11 +3,22 @@
 #include<string.h>
 #include<time.h>
 
-#include"Deplacements_et_Actions.h"
-#include"matrice_terminal.h"
-#include"ChoixJoueur.h"
+#include"../include/Deplacements_et_Actions.h"
+#include"../include/ChoixJoueur.h"
+#include"../include/matrice_terminal.h"
 
 #define N 11
+
+/**
+*\file main.c
+*\author Nore Vincent
+*\date 6 avril 2018
+*\version 1.0
+*\brief Fonction principal.
+*
+*\details Fonction principale qui appelle les différentes fonctions du programme.
+*
+*/
 
 int main(){
 
@@ -15,6 +26,7 @@ int main(){
 	armee_t armee_j2;
 	
 	sbires_t sbire;
+	sbires_t cible;
 	
 	int mat[N][N];
 	
@@ -37,7 +49,7 @@ int main(){
 	
 	while(fin != 1){
  		sbire = ChoixUnite(tour, armee_j1, armee_j2);
-		menu(sbire);
+		menu(sbire, armee_j1, armee_j2, cible, mat);
 		afficher_matrice(mat, armee_j1, armee_j2);
 		
 		if(tour == 1){

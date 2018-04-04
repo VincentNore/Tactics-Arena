@@ -1,28 +1,45 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-/*unités de base */
+/**
+*\file structures.h
+*\author Colin Kevin
+*\date 6 avril 2018
+*\version 1.0
+*\brief Structures et prototypes.
+*
+*\details Définition de la structure sbires et armee ainsi que des prototypes des fonctions de structures.c.
+*
+*/
+
+/**
+*\brief Caractéristiques du pion.
+\details La structure qui contient les caractéristiques du pion.
+*/
 typedef struct sbires{
-	char * nom;
-	char * symbole;
-	int attaque;
-	int vie;
-	int defense;
-	int esquive; 
-	int mana;
-	int nbr_depl;
-	int position[2];
+	char * nom;			/*!< nom du pion */
+	char * symbole;		/*!< symbole du pion */
+	int attaque;		/*!< points d'attaque du pion */
+	int vie;			/*!< points de vie du pion */
+	int defense;		/*!< défense du pion */
+	int esquive;		/*!< esquive du pion */
+	int mana;			/*!< points de magie du pion */
+	int nbr_depl;		/*!< nombre de déplacement possible du pion */
+	int position[2];	/*!< position sur la matrice du pion */
 }sbires_t; 
 
+/**
+*\brief Armées des joueurs.
+\details La structure armée qui contient les pions des joueurs.
+*/
 typedef struct armee_s{
-		sbires_t A;
-		sbires_t B;
-		sbires_t C;
-		sbires_t D;
-		sbires_t E;
+		sbires_t A;		/*!< Pion numéro 1 */
+		sbires_t B;		/*!< Pion numéro 2 */
+		sbires_t C;		/*!< Pion numéro 3 */
+		sbires_t D;		/*!< Pion numéro 4 */
+		sbires_t E;		/*!< Pion numéro 5 */
 }armee_t;
 
-/*void structures(sbires * sbire_bleu, sbires * sbire_rouge);*/
 sbires_t inventaire(sbires_t sbire);
 sbires_t competences(sbires_t sbire, sbires_t cible);
 sbires_t Combat_physique(sbires_t sbire, sbires_t cible);

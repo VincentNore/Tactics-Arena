@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Tactics Arena:  Fichier source de include/matrice_terminal.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Tactics Arena
+   &#160;<span id="projectnumber">1.0</span>
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Généré par Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Recherche');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Recherche');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li>  </ul>
+</div>
+</div><!-- top -->
+<div class="header">
+  <div class="headertitle">
+<div class="title">matrice_terminal.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="matrice__terminal_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include&lt;stdio.h&gt;</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#include&lt;stdlib.h&gt;</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define N 11</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keywordtype">void</span> <a class="code" href="matrice__terminal_8h.html#a8e4027957e4267b9b97d419638f868c7">init_matrice</a>(<span class="keywordtype">int</span> mat[N][N]);</div><div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="keywordtype">int</span> <a class="code" href="matrice__terminal_8h.html#a14c35d792d1a6709c63c68900f27ae19">afficher_matrice</a>(<span class="keywordtype">int</span> mat[N][N], <a class="code" href="structarmee__s.html">armee_t</a> armee_j1, <a class="code" href="structarmee__s.html">armee_t</a> armee_j2);</div><div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div><div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<a class="code" href="structsbires.html">sbires_t</a> <a class="code" href="matrice__terminal_8h.html#a8678fbb44352841f6479e907aa05203d">positionner_sbire</a>(<a class="code" href="structsbires.html">sbires_t</a> sbire, <span class="keywordtype">int</span> mat[N][N]);</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<a class="code" href="structarmee__s.html">armee_t</a> <a class="code" href="matrice__terminal_8h.html#a26244b7600d9b613700a68d241e6e034">init_armee_j1</a>(<a class="code" href="structarmee__s.html">armee_t</a> armee_j1, <a class="code" href="structsbires.html">sbires_t</a> sbire, <span class="keywordtype">int</span> mat[N][N]);</div><div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<a class="code" href="structarmee__s.html">armee_t</a> <a class="code" href="matrice__terminal_8h.html#aea70475855f0b7f4875738b01fe595c1">init_armee_j2</a>(<a class="code" href="structarmee__s.html">armee_t</a> armee_j2, <a class="code" href="structsbires.html">sbires_t</a> sbire, <span class="keywordtype">int</span> mat[N][N]);</div><div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<a class="code" href="structsbires.html">sbires_t</a> <a class="code" href="matrice__terminal_8h.html#a575fa39f40098cf5bba5b5eff25ca33c">init_sbire</a>(<a class="code" href="structsbires.html">sbires_t</a> sbire, <span class="keywordtype">int</span> mat[N][N]);</div><div class="ttc" id="structarmee__s_html"><div class="ttname"><a href="structarmee__s.html">armee_s</a></div><div class="ttdoc">Armées des joueurs. </div><div class="ttdef"><b>Definition:</b> structures.h:35</div></div>
+<div class="ttc" id="structsbires_html"><div class="ttname"><a href="structsbires.html">sbires</a></div><div class="ttdoc">Caractéristiques du pion. </div><div class="ttdef"><b>Definition:</b> structures.h:19</div></div>
+<div class="ttc" id="matrice__terminal_8h_html_a26244b7600d9b613700a68d241e6e034"><div class="ttname"><a href="matrice__terminal_8h.html#a26244b7600d9b613700a68d241e6e034">init_armee_j1</a></div><div class="ttdeci">armee_t init_armee_j1(armee_t armee_j1, sbires_t sbire, int mat[N][N])</div><div class="ttdoc">Créer de l&amp;#39;armée du joueur 1. </div><div class="ttdef"><b>Definition:</b> matrice_terminal.c:198</div></div>
+<div class="ttc" id="matrice__terminal_8h_html_aea70475855f0b7f4875738b01fe595c1"><div class="ttname"><a href="matrice__terminal_8h.html#aea70475855f0b7f4875738b01fe595c1">init_armee_j2</a></div><div class="ttdeci">armee_t init_armee_j2(armee_t armee_j2, sbires_t sbire, int mat[N][N])</div><div class="ttdoc">Créer de l&amp;#39;armée du joueur 2. </div><div class="ttdef"><b>Definition:</b> matrice_terminal.c:224</div></div>
+<div class="ttc" id="matrice__terminal_8h_html_a8e4027957e4267b9b97d419638f868c7"><div class="ttname"><a href="matrice__terminal_8h.html#a8e4027957e4267b9b97d419638f868c7">init_matrice</a></div><div class="ttdeci">void init_matrice(int mat[N][N])</div><div class="ttdoc">Initialisation de la matrice. </div><div class="ttdef"><b>Definition:</b> matrice_terminal.c:27</div></div>
+<div class="ttc" id="matrice__terminal_8h_html_a14c35d792d1a6709c63c68900f27ae19"><div class="ttname"><a href="matrice__terminal_8h.html#a14c35d792d1a6709c63c68900f27ae19">afficher_matrice</a></div><div class="ttdeci">int afficher_matrice(int mat[N][N], armee_t armee_j1, armee_t armee_j2)</div><div class="ttdoc">Afficher la matrice. </div><div class="ttdef"><b>Definition:</b> matrice_terminal.c:43</div></div>
+<div class="ttc" id="matrice__terminal_8h_html_a575fa39f40098cf5bba5b5eff25ca33c"><div class="ttname"><a href="matrice__terminal_8h.html#a575fa39f40098cf5bba5b5eff25ca33c">init_sbire</a></div><div class="ttdeci">sbires_t init_sbire(sbires_t sbire, int mat[N][N])</div><div class="ttdoc">Créer les pions des joueurs. </div><div class="ttdef"><b>Definition:</b> matrice_terminal.c:164</div></div>
+<div class="ttc" id="matrice__terminal_8h_html_a8678fbb44352841f6479e907aa05203d"><div class="ttname"><a href="matrice__terminal_8h.html#a8678fbb44352841f6479e907aa05203d">positionner_sbire</a></div><div class="ttdeci">sbires_t positionner_sbire(sbires_t sbire, int mat[N][N])</div><div class="ttdoc">Choisir où placer les pions. </div><div class="ttdef"><b>Definition:</b> matrice_terminal.c:124</div></div>
+</div><!-- fragment --></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Généré par &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

@@ -2,9 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include"structures.h"
+#include "../include/structures.h"
 
 #define N 11
+
+/**
+*\file Deplacements_et_Actions.h
+*\author Jolliet Corentin
+*\date 6 avril 2018
+*\version 1.0
+*\brief Prototypes.
+*
+*\details Définition des prototypes des fonctions de Deplacements_et_Actions.c.
+*
+*/
 
 int Detection_Cible (sbires_t sbire, int direction, int mat[N][N], int ennemi);
 
@@ -24,4 +35,4 @@ sbires_t Selection_Deplacement(sbires_t sbires, int mat[N][N]);
 
 sbires_t Action(sbires_t sbires, int mat[N][N]);
 
-int menu(sbires_t sbire);
+int menu(sbires_t sbire, armee_t armee_j1, armee_t armee_j2, sbires_t cible, int mat[N][N]);

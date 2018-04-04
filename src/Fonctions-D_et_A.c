@@ -3,12 +3,34 @@
 #include <math.h>
 #include <string.h>
 #include <time.h>
-#include "Deplacements_et_Actions.h"
-#include"matrice_terminal.h"
+#include "../include/Deplacements_et_Actions.h"
+#include "../include/matrice_terminal.h"
 
-int menu(sbires_t sbire){
+#define N 11
 
-	int deplace;
+/**
+*\file Fonctions-D_et_A.c
+*\author Jolliet Corentin
+*\date 6 avril 2018
+*\version 1.0
+*\brief Menu pour choisir l'action du pion.
+*
+*\details Affichage d'un menu pour permettre au joueur de choisir l'action que devra effectuer le pion.
+*
+*/
+
+/**
+*\brief Choisis l'action du pion.
+*\details Permet de choisir entre le déplacement, l'attaque, les stratégies du pion et annuler l'action.
+*\param sbires_t sbire La structure du pion courant.
+*\param armee_t armee_j1 Contient les pions du joueur 1.
+*\param armee_t armee_j2 Contient les pions du joueur 2.
+*\param sbires_t cible La structure de la cible.
+*\param int mat[N][N] La matrice d'affichage.
+*/
+int menu(sbires_t sbire, armee_t armee_j1, armee_t armee_j2, sbires_t cible, int mat[N][N]){
+
+	int deplace = 0;
 	int choix = 0;
 	int ennemi;
 
@@ -50,6 +72,7 @@ int menu(sbires_t sbire){
 				break;
 
 			case 4 : printf("Action annulée\n");
+				menu(sbire, armee_j1, armee_j2, cible, mat);
 				break;
 
 			default : printf("Won't work\n");

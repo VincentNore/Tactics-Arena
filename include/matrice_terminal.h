@@ -3,7 +3,18 @@
 
 #define N 11
 
-void init_matrice();
+/**
+*\file matrice_terminal.h
+*\author Nore Vincent
+*\date 6 avril 2018
+*\version 1.0
+*\brief Prototypes.
+*
+*\details Définition des prototypes des fonctions de matrice_terminal.c.
+*
+*/
+
+void init_matrice(int mat[N][N]);
 
 int afficher_matrice(int mat[N][N], armee_t armee_j1, armee_t armee_j2);
 

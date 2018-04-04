@@ -2,12 +2,32 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
-#include"structures.h"
+#include "../include/structures.h"
 
 #define N 11
 
+/**
+*\file Deplacements_et_Actions.c
+*\author Jolliet Corentin
+*\author Colin Kevin
+*\date 6 avril 2018
+*\version 1.0
+*\brief Permettre aux joueurs d'effectuer une action
+*
+*\details Ces fonctions permettent de déplacer et d'attaquer un pion adverse, mais aussi de détecter si un ennemi est à porter et de calculer la distance d'attaque du pion.
+*
+*/
+
+/**
+*\brief Détecter si une cible est présente.
+*\details Vérifier, grâce à des calculs, si des ennemis sont présents autour du pion courant.
+*\param sbires_t sbire La structure du pion courant.
+*\param int direction La direction, en entier, à vérifier.
+*\param int mat[N][N] La matrice d'affichage.
+*\param int ennemi La variable pour compter le nombre d'ennemis détecter.
+*/
 int Detection_Cible (sbires_t sbire, int direction, int mat[N][N], int ennemi){
-/*Fonction de détection de cible dans toutes les directions - Détection linéaire - Version Observation à valeurs de Test*/
+/*Fonction de détection de cible dans toutes les directions - Détection linéaire*/
 	int n;
 	switch(direction){
 		case 1 : for(n = 1 ; (n <= (sbire.nbr_depl + 1)) && ((sbire.position[1] - n) >= 0) ; n++){
@@ -49,8 +69,16 @@ int Detection_Cible (sbires_t sbire, int direction, int mat[N][N], int ennemi){
 	return ennemi;
 }
 
+/**
+*\brief Détecter si une cible est à porter.
+*\details Vérifier, grâce à des calculs, si des ennemis sont à porter d'attaque du pion.
+*\param sbires_t sbire La structure du pion courant.
+*\param int direction La direction, en entier, à vérifier.
+*\param int mat[N][N] La matrice d'affichage.
+*\param int ennemi La variable pour compter le nombre d'ennemis détecter.
+*/
 int Detection_Portee (sbires_t sbire, int direction, int mat[N][N], int ennemi){
-/*Fonction de détection de cible dans les 4 directions - Direction Linéaire - Version Comptage à valeurs de Test*/
+/*Fonction de détection de cible dans les 4 directions - Direction Linéaire -*/
 	int n;
 	switch(direction){
 		case 1 : for(n = 1 ; (n <= (sbire.nbr_depl + 1)) && ((sbire.position[1] - n) >= 0) ; n++){
@@ -91,6 +119,14 @@ int Detection_Portee (sbires_t sbire, int direction, int mat[N][N], int ennemi){
 	return ennemi;
 }
 
+/**
+*\brief Déplacer un pion dans la direction choisis.
+*\details Donner la possibilité au joueur de déplacer son pion dans une des quatre directions proposé.
+*\param sbires_t sbire La structure du pion courant.
+*\param int mat[N][N] La matrice d'affichage.
+*\param int direction La direction, en entier, à vérifier.
+*\param int nb_dep Le nombre de déplacement pour ce pion.
+*/
 sbires_t Deplacer_Pion(sbires_t sbires, int mat[N][N], int direction, int nb_dep){
 /*Fonction de déplacement d'un Sbire*/
 /*Compte les cases à la verticale (haut et bas) et à l'horizontale (gauche et droite)
@@ -98,6 +134,7 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 
 	int nbr_cases = 0;
 	int nbr_cap = 0;
+	int n;
 	char * dir;
 	
 	printf("Comptage des cases praticables :\n");
@@ -111,7 +148,7 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
 			printf("Horizontal gauche : ");
 
-			for(int n = 1; (mat[sbires.position[0]][(sbires.position[1] - n)] == 0) && (nbr_cases < nb_dep) ; n++){
+			for(n = 1; (mat[sbires.position[0]][(sbires.position[1] - n)] == 0) && (nbr_cases < nb_dep) ; n++){
 
 				if( ((sbires.position[1] - nbr_cases) > 0) && (sbires.position[1] > 0) ){ /*Prise en compte des bords de la matrice*/
 					nbr_cases++;
@@ -183,7 +220,7 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 
 			printf("Horizontal droit : ");
 
-			for(int n = 1 ; (mat[sbires.position[0]][(sbires.position[1] + n)] == 0) && (nbr_cases < nb_dep) ; n++){
+			for(n = 1 ; (mat[sbires.position[0]][(sbires.position[1] + n)] == 0) && (nbr_cases < nb_dep) ; n++){
 
 				if( ((sbires.position[1] + nbr_cases) < N) && (sbires.position[1] < N)) { /*Prise en compte des bords de la matrice*/
 
@@ -225,12 +262,12 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 					printf("%i déplacements encore possibles, voulez-vous continuer ?\n\t(Retour en arrière IMPOSSIBLE)\n(Y/N) : ", (nb_dep - nbr_cases));
 					scanf("%s", dir);
 
-					if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
+					if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "n") == 0) || (strcmp(dir, "N") == 0) ) {
 
 						printf("Même direction (G ou D) ?\n(Y/N) : "); /*Possibilité de continuer à l'horizontale ou d'aller à la verticale*/
 						scanf("%s", dir);
 
-						if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
+						if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "n") == 0) || (strcmp(dir, "N") == 0) ) {
 
 							sbires = Deplacer_Pion(sbires, mat, direction, (nb_dep - nbr_cap) ); /*Repéte la fonction avec la même direction*/
 
@@ -252,7 +289,7 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 		printf("Changer de direction ?\n(Y/N) : "); /*Si il y a eu erreur de frappe ou changement d'avis, plus haut, on donne la possibilitée au joueur de changer sa direction de déplacement*/
 		scanf("%s", dir);
 
-		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
+		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "n") == 0) || (strcmp(dir, "N") == 0) ) {
 
 			sbires = Deplacer_Pion(sbires, mat, (direction + 1), nb_dep ); /*Repéte la fonction avec un changement de direction (Verticale)*/
 			return sbires; /*Renvoi de la structure dont on a modifié la position*/
@@ -270,10 +307,10 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 		scanf("%s", dir);
 
 		/*Comptage des cases praticables en haut du sbire*/
-		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
+		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "n") == 0) || (strcmp(dir, "N") == 0) ) {
 			printf("Vertical haut : ");
 
-			for(int n = 1 ; (mat[(sbires.position[0] - n)][sbires.position[1]] == 0) && (nbr_cases < nb_dep) ; n++){
+			for(n = 1 ; (mat[(sbires.position[0] - n)][sbires.position[1]] == 0) && (nbr_cases < nb_dep) ; n++){
 
 				if( ((sbires.position[0] - nbr_cases) > 0) && (sbires.position[0] > 0)){ /*Prise en compte des bords de la matrice*/
 
@@ -315,12 +352,12 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 					printf("%i déplacements encore possibles, voulez-vous continuer ?\n\t(Retour en arrière IMPOSSIBLE)\n(Y/N) : ", (nb_dep - nbr_cases));
 					scanf("%s", dir);
 
-					if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
+					if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "n") == 0) || (strcmp(dir, "N") == 0) ) {
 
 						printf("Même direction (H ou B) ?\n(Y/N) : "); /*Possibilité de continuer à l'horizontale ou d'aller à la verticale*/
 						scanf("%s", dir);
 
-						if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
+						if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "n") == 0) || (strcmp(dir, "N") == 0) ) {
 
 							sbires = Deplacer_Pion(sbires, mat, direction, (nb_dep - nbr_cap) ); /*Repéte la fonction avec la même direction*/
 
@@ -343,10 +380,10 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 		scanf("%s", dir);
 
 		/*Comptage des cases praticables en haut du sbire*/
-		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {	
+		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "n") == 0) || (strcmp(dir, "N") == 0) ) {	
 			printf("Vertical bas : ");
 
-			for(int n = 1 ; (mat[(sbires.position[0] + n)][sbires.position[1]] == 0) && (nbr_cases < nb_dep) ; n++){
+			for(n = 1 ; (mat[(sbires.position[0] + n)][sbires.position[1]] == 0) && (nbr_cases < nb_dep) ; n++){
 
 				if( ((sbires.position[0] + nbr_cases) < N) && (sbires.position[0] < N)){ /*Prise en compte des bords de la matrice*/
 
@@ -388,12 +425,12 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 					printf("%i déplacements encore possibles, voulez-vous continuer ?\n\t(Retour en arrière IMPOSSIBLE)\n(Y/N) : ", (nb_dep - nbr_cases));
 					scanf("%s", dir);
 
-					if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
+					if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "n") == 0) || (strcmp(dir, "N") == 0) ) {
 
 						printf("Même direction (H ou B) ?\n(Y/N) : "); /*Possibilité de continuer à l'horizontale ou d'aller à la verticale*/
 						scanf("%s", dir);
 
-						if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
+						if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "n") == 0) || (strcmp(dir, "N") == 0) ) {
 
 							sbires = Deplacer_Pion(sbires, mat, direction, (nb_dep - nbr_cap) ); /*Repéte la fonction avec la même direction*/
 
@@ -416,7 +453,7 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 		printf("Changer de direction ?\n(Y/N) : "); /*Si il y a eu erreur de frappe ou changement d'avis, plus haut, on donne la possibilitée au joueur de changer sa direction de déplacement*/
 		scanf("%s", dir);
 
-		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "o") == 0) || (strcmp(dir, "O") == 0) ) {
+		if( (strcmp(dir, "Y") == 0) || (strcmp(dir, "y") == 0) || (strcmp(dir, "n") == 0) || (strcmp(dir, "N") == 0) ) {
 
 			sbires = Deplacer_Pion(sbires, mat, (direction - 1), nb_dep ); /*Repéte la fonction avec un changement de direction (Horizontale)*/
 			return sbires;
@@ -430,6 +467,12 @@ Laisse le choix de la direction tout en prenant les limites de déplacement et l
 
 }
 
+/**
+*\brief Attaquer une cible avec une attaque automatique.
+*\details Calculer les dégâts qu'emmétra le pion en fonction de la défense et de l'esquive de la cible.
+*\param sbires_t sbire La structure du pion courant.
+*\param sbires_t cible La structure de la cible.
+*/
 sbires_t Combat_physique(sbires_t sbire, sbires_t cible){
 /*Fonction de calcul des dégâts physiques infligés*/
 
@@ -454,7 +497,13 @@ sbires_t Combat_physique(sbires_t sbire, sbires_t cible){
 	return cible; /*Renvoi de la structure modifiée par la fonction*/
 }
 
-sbires_t Combat_magique(sbires sbire, sbires cible){
+/**
+*\brief Attaquer une cible avec une attaque magique.
+*\details Calculer les dégâts qu'emmétra le pion en fonction de la défense et de l'esquive de la cible.
+*\param sbires_t sbire La structure du pion courant.
+*\param sbires_t cible La structure de la cible.
+*/
+sbires_t Combat_magique(sbires_t sbire, sbires_t cible){
 /*Fonction de calcul des dégâts magiques infligés*/
 
 	int degats;
@@ -476,6 +525,12 @@ sbires_t Combat_magique(sbires sbire, sbires cible){
 	return cible; /*Renvoi de la structure modifiée par la fonction*/
 }
 
+/**
+*\brief Calculer si une cible est à porter du pion.
+*\details Fonction pour calculer si une cible est à porter d'attaque du pion courant.
+*\param sbires_t sbire La structure du pion courant.
+*\param sbires_t cible La structure de la cible.
+*/
 int Portee (sbires_t sbire, sbires_t cible){
 /*Fonction indiquant si un ennemi est à portée du sbire*/
 
@@ -522,6 +577,12 @@ int Portee (sbires_t sbire, sbires_t cible){
 
 }
 
+/**
+*\brief Séléctionner l'attaque.
+*\details Sélectionner l'attaque qu'effectuera le pion courant sur sa cible.
+*\param sbires_t sbire La structure du pion courant.
+*\param sbires_t cible La structure de la cible.
+*/
 sbires_t Selection_Attaque(sbires_t sbire, sbires_t cible){
 /*Fonction de sélection du type d'Attaque*/
 
@@ -563,6 +624,12 @@ sbires_t Selection_Attaque(sbires_t sbire, sbires_t cible){
 
 }
 
+/**
+*\brief Séléctionner la direction pour ce déplacer.
+*\details Sélectionner a direction pour permettre au pion de se d"placer.
+*\param sbires_t sbire La structure du pion courant.
+*\param int mat[N][N] La matrice d'affichage.
+*/
 sbires_t Selection_Deplacement(sbires_t sbires, int mat[N][N]){
 /*Fonction de sélection de la direction de déplacement*/
 
@@ -605,6 +672,12 @@ sbires_t Selection_Deplacement(sbires_t sbires, int mat[N][N]){
 
 }
 
+/**
+*\brief Séléctionner l'action du pion.
+*\details Sélectionner l'action que le pion devra effectuer en fonction des choix possibles.
+*\param sbires_t sbire La structure du pion courant.
+*\param int mat[N][N] La matrice d'affichage.
+*/
 sbires_t Action(sbires_t sbires, int mat[N][N]){
 /*Actions possibles de l'unité : Défense , Inventaire et Annulation de l'Action*/
 
@@ -623,7 +696,7 @@ sbires_t Action(sbires_t sbires, int mat[N][N]){
 		switch(choix_action){
 
 			case 1 : printf("Inventaire\n");
-				inventaire(sbire);
+				inventaire(sbires);
 				break;
 
 			case 2 : printf("%s observe les environs\n", sbires.nom);
