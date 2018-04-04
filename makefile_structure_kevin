@@ -1,8 +1,0 @@
-matrice: fic1.o 
-	gcc -o matrice fic1.o 
-
-fic1.o: fic1.c test.h
-	gcc -o fic1.o -c fic1.c 
-
-
-
