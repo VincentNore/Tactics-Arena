@@ -1,22 +1,24 @@
 
-Tactics: main.o structures.o ChoixJoueur.o matrice.o 
-	gcc -o Tactics main.o structures.o ChoixJoueur.o
+Tactics_Arena: main.o structures.o ChoixJoueur.o matrice_terminal.o Deplacements_et_Actions.o Fonctions-D_et_A.o
+	gcc -o Tactics_arena main.o structures.o ChoixJoueur.o matrice_terminal.o Deplacements_et_Actions.o Fonctions-D_et_A.o
 
-ChoixJoueur.o: ChoixJoueur.c 
-	gcc -o ChoixJoueur.o -c ChoixJoueur.c -W -Wall -ansi -pedantic
+ChoixJoueur.o: src/ChoixJoueur.c 
+	gcc -c src/ChoixJoueur.c
 
-structures.o:structures.c 
-	gcc -o structures.o -c structures.c -W -Wall -ansi -pedantic
+structures.o: src/structures.c 
+	gcc -c src/structures.c
 
-main.o: main.c couleur.h structures.h ChoixJoueur.h Deplacements_et_Actions.h matrice_terminal.h
-	gcc -o main.o -c main.c -W -Wall -ansi -pedantic
+main.o: src/main.c include/couleur.h include/structures.h include/ChoixJoueur.h include/Deplacements_et_Actions.h include/matrice_terminal.h
+	gcc -c src/main.c 
 	
-matrice.o: matrice_terminal.c 
-	gcc -o matrice.o matrice_terminal.c
+matrice_terminal.o: src/matrice_terminal.c
+	gcc -c src/matrice_terminal.c
 	
-Deplacements_et_Actions.o: Deplacements_et_Actions.c
-	gcc -o Deplacements_et_Actions.o -c Deplacements_et_Actions.c
+Deplacements_et_Actions.o: src/Deplacements_et_Actions.c
+	gcc -c src/Deplacements_et_Actions.c
 	
-Fonctions-D_et_A.o: Fonctions-D_et_A.c
-	gcc -o Fonctions-D_et_A.o -c Fonctions-D_et_A.c
+Fonctions-D_et_A.o: src/Fonctions-D_et_A.c
+	gcc -c src/Fonctions-D_et_A.c
 
+clean:
+	rm -rf *.o
